@@ -4,8 +4,9 @@
 
 apt-get update
 apt-get install -y build-essential git-core
-curl -L get.rvm.io | bash -s stable
+\curl -sSL https://get.rvm.io | bash -s stable
 source /etc/profile.d/rvm.sh
-rm reload
+rvm reload
 rvm install 2.1.2
 gem install sinatra
+
