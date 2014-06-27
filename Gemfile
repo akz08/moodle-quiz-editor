@@ -2,4 +2,7 @@ source 'https://rubygems.org'
 ruby "2.1.2"
 gem 'rack' 
 gem 'sinatra'
-gem 'rake'
+
+group :test do
+    gem "rake"
+end
