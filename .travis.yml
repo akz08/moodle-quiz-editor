@@ -1,3 +1,6 @@
 language: ruby
 rvm: 
-    - 2.1.2
+  - 2.1.2
+deploy:
+  provider: cloud66
+  redeployment_hook: "https://hooks.cloud66.com/stacks/redeploy/c88ff1accd5c4f934664e7b39e4e1d54/aa0e0b9d0ca300823f5382f892902a44"
