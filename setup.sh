@@ -10,3 +10,8 @@ rvm reload
 rvm install 2.1.2
 gem install sinatra
 
+# JS stuff
+apt-get install -y nodejs-legacy npm
+npm install -g yo
+npm install -g generator-angular
+
