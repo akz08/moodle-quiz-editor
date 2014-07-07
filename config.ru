@@ -1,6 +1,6 @@
 require File.expand_path('../app.rb', __FILE__)
 use Rack::ShowExceptions
-run MyApp.new
+
 
 # map the resource directories
 map "/bower_components" do
@@ -22,3 +22,5 @@ end
 map "/images" do
 	run Rack::Directory.new("./app/images")
 end
+
+run MyApp.new
