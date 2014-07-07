@@ -14,6 +14,7 @@ class MyApp < Sinatra::Base
   		File.read(File.join('app', 'index.html'))
 	end
 
+
 	require './models/init'
 	require './helpers/init'
 	require './routes/init'
