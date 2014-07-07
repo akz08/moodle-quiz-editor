@@ -11,19 +11,19 @@ map "/bower_components" do
 end
 
 map "/styles" do
-	run Rack::Directory.new("./app/styles")
+	run Rack::Directory.new("./public/styles")
 end
 
 map "/scripts" do
-	run Rack::Directory.new("./app/scripts")
+	run Rack::Directory.new("./public/scripts")
 end
 
 map "/views" do
-	run Rack::Directory.new("./app/views")
+	run Rack::Directory.new("./public/views")
 end
 
 map "/images" do
-	run Rack::Directory.new("./app/images")
+	run Rack::Directory.new("./public/images")
 end
 
 run MyApp.new

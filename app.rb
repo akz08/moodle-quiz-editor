@@ -11,7 +11,7 @@ class MyApp < Sinatra::Base
 	DataMapper.setup(:default, 'mysql://root:uclthesis@localhost/moodle_quiz_editor')
 
 	get '/' do 
-  		File.read(File.join('app', 'index.html'))
+  		File.read(File.join('public', 'index.html'))
 	end
 
 
