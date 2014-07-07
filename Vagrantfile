@@ -9,5 +9,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: "setup.sh"
 
   config.vm.network "forwarded_port", guest: 8080, host: 8000
+  config.vm.network "forwarded_port", guest: 9000, host: 4567
 
 end

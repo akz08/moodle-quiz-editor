@@ -8,10 +8,19 @@ apt-get install -y build-essential git-core
 source /etc/profile.d/rvm.sh
 rvm reload
 rvm install 2.1.2
-gem install sinatra
+gem install sinatr
 
 # JS stuff
 apt-get install -y nodejs-legacy npm
 npm install -g yo
 npm install -g generator-angular
+
+# if problems persist when using yo
+# bower cache clean
+# npm cache clean
+
+apt-get install -y mysql-server
+
+# Datamapper
+apt-get install -y libmysqlclient-dev
 
