@@ -2,22 +2,25 @@
 
 /**
  * @ngdoc overview
- * @name moodleQuizEditorApp
+ * @name quizEditorApp
  * @description
- * # moodleQuizEditorApp
+ * # quizEditorApp
  *
  * Main module of the application.
  */
-angular
-  .module('moodleQuizEditorApp', [
+
+var quizEditorApp = angular.module('quizEditorApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
-  ])
-  .config(function ($routeProvider) {
+    'ngTouch',
+    'quizEditorControllers'
+  ]);
+
+quizEditorApp.config(['$routeProvider', 
+  function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -30,4 +33,4 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  }]);

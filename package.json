@@ -1,5 +1,7 @@
 {
   "name": "moodlequizeditor",
+  "description": "An alternative Moodle question editor",
+  "repository": "https://github.com/akz08/moodle-quiz-editor",
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
@@ -26,12 +28,20 @@
     "jshint-stylish": "^0.2.0",
     "load-grunt-tasks": "^0.4.0",
     "time-grunt": "^0.3.1",
+    "karma": "^0.12.16",
+    "phantomjs": "^1.9.7",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "protractor": "~1.0.0",
     "bower": "^1.2.6"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "node node_modules/karma/bin/karma start test/karma.conf.js",
+    "update-webdriver": "./node_modules/protractor/bin/webdriver-manager update",
+
+    "protractor": "./node_modules/protractor/bin/protractor test/protractor-conf.js"
   }
 }
