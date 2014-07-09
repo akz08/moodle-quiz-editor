@@ -1,3 +1,4 @@
+'use strict';
 
 var quizEditorControllers = angular.module('quizEditorControllers', []);
 
@@ -6,7 +7,10 @@ quizEditorControllers.controller('MainCtrl', ['$scope',
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
-      'Karma'
+      'Karma',
+      'STuff',
+      'More',
+      'Stuff'
     ];
   }]);
 
