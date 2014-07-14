@@ -22,19 +22,19 @@
 
     <!-- Add your site or application content here -->
     <div class="container">
-      <div class="header">
+      <div class="header" ng-controller="TabCtrl">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
+          <li ng-class="{ active: isActive('/') }"><a ng-href="#">Home</a></li>
+          <li ng-class="{ active: isActive('/about') }"><a ng-href="#/about">About</a></li>
+          <li ng-class="{ active: isActive('/contact') }"><a ng-href="#/contact">Contact</a></li>
         </ul>
-        <h3 class="text-muted">moodleQuizEditor</h3>
+        <h3 class="text-muted">Moodle Quiz Editor</h3>
       </div>
 
       <div ng-view=""></div>
 
       <div class="footer">
-        <p>UCL MSc Thesis</p>
+        <p><span class="glyphicon glyphicon-copyright-mark"></span> 2014, Amer Kamil Zainal</p>
       </div>
     </div>
 
@@ -67,6 +67,8 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="bower_components/restangular/dist/restangular.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

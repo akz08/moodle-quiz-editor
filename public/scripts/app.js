@@ -16,6 +16,7 @@ var quizEditorApp = angular.module('quizEditorApp', [
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'restangular',
     'quizEditorControllers'
   ]);
 
@@ -29,6 +30,9 @@ quizEditorApp.config(['$routeProvider',
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
+      })
+      .when('/contact', {
+        templateUrl: 'views/contact.html',
       })
       .otherwise({
         redirectTo: '/'

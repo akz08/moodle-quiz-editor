@@ -1,9 +1,31 @@
-<form>
-    <input ng-model="name"> 
-    <select>
-        <option value="tf">True/False</option>
-        <option value="mcq">Multiple Choice</option>
-    </select>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+			<th>Type</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in data">
+			<td>{{item.id}}</td>
+			<td>{{item.title}}</td>
+			<td>{{item.type}}</td>
+		</tr>
+	</tbody>
+</table>
 
-    <p ng-repeat="thing in awesomeThings">{{thing}}</p>
+<form>
+    <input ng-model="questionTitle"> 
+    <select ng-model="questionType">
+    	<option value="calculated">Calculated</option>
+    	<option value="description">Description</option>
+    	<option value="essay">Essay</option>
+    	<option value="matching">Matching</option>
+    	<option value="embeddedAnswers">Embedded Answers</option>
+    	<option value="multipleChoice">Multiple Choice</option>
+    	<option value="shortAnswer">Short Answer</option>
+    	<option value="numerical">Numerical</option>
+        <option value="trueFalse">True/False</option>
+    </select>
 </form>
