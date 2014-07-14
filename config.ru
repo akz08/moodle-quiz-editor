@@ -26,4 +26,4 @@ map "/images" do
 	run Rack::Directory.new("./public/images")
 end
 
-run MyApp.new
+run Sinatra::Application
