@@ -1,0 +1,6 @@
+development:
+	adapter: mysql2
+	database: moodle_quiz_editor
+	username: root
+	password: uclthesis
+	host: localhost
