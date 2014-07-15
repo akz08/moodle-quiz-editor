@@ -7,15 +7,16 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="item in data">
+		<tr ng-repeat="item in questionPreview">
 			<td>{{item.id}}</td>
 			<td>{{item.title}}</td>
 			<td>{{item.type}}</td>
+			<td><a ng-click="deleteQuestion(item.id)">x</a></td>
 		</tr>
 	</tbody>
 </table>
 
-<form>
+<form class="form-horizontal" placeholder="Question title" ng-submit="createQuestion()">
     <input ng-model="questionTitle"> 
     <select ng-model="questionType">
     	<option value="calculated">Calculated</option>
@@ -28,4 +29,6 @@
     	<option value="numerical">Numerical</option>
         <option value="trueFalse">True/False</option>
     </select>
+    <input type="submit" class="btn btn-primary" value="Submit">
 </form>
+
