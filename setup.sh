@@ -13,14 +13,9 @@ gem install sinatra
 # JS stuff
 apt-get install -y nodejs-legacy npm
 npm install -g bower
-npm install -g yo
-npm install -g generator-angular
+# npm install -g yo
+# npm install -g generator-angular
 # npm install -g protractor
-
-# these commands to be run in the /vagrant directory
-cd /vagrant
-npm install
-bower install --allow-root
 
 # Need to install Java for Selenium/Protractor
 apt-get install -y default-jdk
@@ -33,6 +28,8 @@ debconf-set-selections <<< 'mysql-server mysql-server/root_password password ucl
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password uclthesis'
 
 apt-get install -y mysql-server
+# setup default database
+mysql -uroot -puclthesis -e "CREATE DATABASE moodle_quiz_editor;"
 
 # Datamapper
 apt-get install -y libmysqlclient-dev
@@ -40,3 +37,8 @@ apt-get install -y libmysqlclient-dev
 # PhantomJS
 apt-get install -y libfontconfig
 
+# these commands to be run in the /vagrant directory
+cd /vagrant
+npm install
+bower install --allow-root
+bundle install
