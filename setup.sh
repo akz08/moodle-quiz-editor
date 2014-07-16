@@ -29,6 +29,9 @@ apt-get install -y default-jdk
 # bower cache clean
 # npm cache clean
 
+debconf-set-selections <<< 'mysql-server mysql-server/root_password password uclthesis'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password uclthesis'
+
 apt-get install -y mysql-server
 
 # Datamapper
