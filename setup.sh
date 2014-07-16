@@ -16,6 +16,9 @@ npm install -g bower
 npm install -g yo
 npm install -g generator-angular
 # npm install -g protractor
+
+# these commands to be run in the /vagrant directory
+cd /vagrant
 npm install
 bower install --allow-root
 
