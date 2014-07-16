@@ -43,6 +43,7 @@
     "test": "node node_modules/karma/bin/karma start test/karma.conf.js",
     "update-webdriver": "./node_modules/protractor/bin/webdriver-manager update",
 
-    "protractor": "./node_modules/protractor/bin/protractor test/protractor-conf.js"
+    "protractor": "./node_modules/protractor/bin/protractor test/protractor-conf.js",
+    "bower": "./node_modules/bower/bin/bower"
   }
 }
