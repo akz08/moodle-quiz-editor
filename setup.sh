@@ -39,6 +39,6 @@ apt-get install -y libfontconfig
 
 # these commands to be run in the /vagrant directory
 cd /vagrant
-npm install
+npm install --no-bin-links
 bower install --allow-root
 bundle install
