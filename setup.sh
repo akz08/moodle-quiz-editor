@@ -12,10 +12,12 @@ gem install sinatra
 
 # JS stuff
 apt-get install -y nodejs-legacy npm
+npm install -g bower
 npm install -g yo
 npm install -g generator-angular
 # npm install -g protractor
-# npm install
+npm install
+bower install --allow-root
 
 # Need to install Java for Selenium/Protractor
 apt-get install -y default-jdk
