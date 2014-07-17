@@ -27,9 +27,13 @@ apt-get install -y default-jdk
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password uclthesis'
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password uclthesis'
 
+# MySQL
 apt-get install -y mysql-server
 # setup default database
 mysql -uroot -puclthesis -e "CREATE DATABASE moodle_quiz_editor;"
+
+# SQLite
+apt-get install -y libsqlite3-dev
 
 # Datamapper
 apt-get install -y libmysqlclient-dev

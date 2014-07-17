@@ -1,0 +1,16 @@
+require File.join(File.dirname(__FILE__), '..', 'app.rb')
+
+require 'rubygems'
+require 'sinatra'
+require 'rack/test'
+require 'rspec'
+
+set :environment, :test
+
+RSpec.configure do |config|
+	config.include Rack::Test::Methods
+
+	config.color = true
+
+	config.before(:each) { DataMapper.auto_migrate! }
+end
