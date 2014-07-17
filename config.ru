@@ -3,7 +3,6 @@ require 'sinatra'
 use Rack::ShowExceptions
 
 set :environment, ENV['RACK_ENV'].to_sym
-disable :run, :reload
 
 # map the resource directories
 map "/bower_components" do
