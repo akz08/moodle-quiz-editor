@@ -28,7 +28,7 @@ debconf-set-selections <<< 'mysql-server mysql-server/root_password password ucl
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password uclthesis'
 
 # MySQL
-apt-get install -y mysql-server
+apt-get install -y mysql-server-5.5
 # setup default database
 mysql -uroot -puclthesis -e "CREATE DATABASE moodle_quiz_editor;"
 
@@ -43,6 +43,6 @@ apt-get install -y libfontconfig
 
 # these commands to be run in the /vagrant directory
 cd /vagrant
+bundle install
 npm install --no-bin-links
 bower install --allow-root
-bundle install
