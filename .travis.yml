@@ -1,9 +1,10 @@
 language: ruby
 rvm: 
   - "2.1.2"
-  
+
 deploy:
   provider: cloud66
   redeployment_hook: "https://hooks.cloud66.com/stacks/redeploy/c88ff1accd5c4f934664e7b39e4e1d54/3e4137f8419d0dcfbc81331742da5043"
+  on: development
 
 script: bundle exec rspec spec
