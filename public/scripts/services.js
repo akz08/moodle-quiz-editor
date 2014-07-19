@@ -2,11 +2,8 @@
 
 /* Services */
 
-var quizEditorServices = angular.module('quizEditorServices', ['ngResource']);
-
-quizEditorServices.factory('Question', ['$resource', 
-	function($resource) {
-		return $resource('api/questions/:questionId.json', {}, {
-			
-		});
-	}]);
+quizeditorApp.factory('Questions', ['Restangular', 
+	function(Restangular) {
+		return Restangular.service('questions');
+	}
+]);

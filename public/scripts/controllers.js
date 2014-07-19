@@ -1,61 +1,38 @@
 'use strict';
 
-var quizEditorControllers = angular.module('quizEditorControllers', []);
+quizeditorApp.controller('MainCtrl', ['$scope', 'Questions', 
+	function ($scope, Questions) {
 
-quizEditorControllers.controller('MainCtrl', ['$scope', 'Restangular', 
-	function ($scope, Restangular) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    $scope.question = {title: "", type: "trueFalse"};
 
-    // set default question type
-    $scope.questionType = 'trueFalse';
-
-    // setup base route for questions
-    var baseQuestions = Restangular.all('questions');
-
-    // retrieve questions to display
-    $scope.updateQuestions = function() {
-      baseQuestions.getList().then(function(allQuestions) {
-        $scope.questionPreview = allQuestions;
-      });
-    };
-
-    // retrieve questions on page load
-    $scope.updateQuestions();
+    Questions.getList().then(function(questions) {
+      $scope.questions = questions;
+    });
 
     $scope.createQuestion = function() {
-      var newMessage = {
-        "title": $scope.questionTitle,
-        "type": $scope.questionType
-      };
-
-      baseQuestions.post(newMessage).then(function(newMsg) {
-
-        $scope.updateQuestions();
-
+      Questions.post($scope.question).then(function(question) {
+        $scope.questions.push(question);
+        $scope.question = {title: "", type: "trueFalse"};
       });
     };
 
-    $scope.deleteQuestion = function(id) {
-      baseQuestions.get(id).then(function(question) {
-        question.remove();
-        $scope.updateQuestions();
+    $scope.deleteQuestion = function(question) {
+      question.remove().then(function() {
+        var i = $scope.questions.indexOf(question);
+        $scope.questions.splice(i, 1);
       });
-    };
+    }
 
   }]);
 
-quizEditorControllers.controller('TabCtrl', ['$scope', '$location',
+quizeditorApp.controller('TabCtrl', ['$scope', '$location',
   function($scope, $location) {
     $scope.isActive = function(viewLocation) {
       return viewLocation === $location.path();
     };
   }]);
 
-quizEditorControllers.controller('AboutCtrl', ['$scope',
+quizeditorApp.controller('AboutCtrl', ['$scope',
 	function ($scope) {
     $scope.dummy = 1;
   }]);

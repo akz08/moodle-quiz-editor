@@ -1,3 +1,4 @@
+/* global quizeditorApp:true */
 'use strict';
 
 /**
@@ -9,7 +10,7 @@
  * Main module of the application.
  */
 
-var quizEditorApp = angular.module('quizEditorApp', [
+var quizeditorApp = angular.module('quizEditorApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -17,10 +18,9 @@ var quizEditorApp = angular.module('quizEditorApp', [
     'ngSanitize',
     'ngTouch',
     'restangular',
-    'quizEditorControllers'
   ]);
 
-quizEditorApp.config(['$routeProvider', 
+quizeditorApp.config(['$routeProvider', 
   function ($routeProvider) {
     $routeProvider
       .when('/', {
