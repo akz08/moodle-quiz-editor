@@ -14,6 +14,7 @@ rvm install 2.1.2
 # Install front-end tools
 apt-get install -y nodejs-legacy npm
 npm install -g bower
+npm install -g yo
 
 # Install Java for Selenium/Protractor
 apt-get install -y default-jdk
