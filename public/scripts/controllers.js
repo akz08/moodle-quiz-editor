@@ -25,7 +25,7 @@ quizeditorApp.controller('MainCtrl', ['$scope', 'Questions',
 
   }]);
 
-quizeditorApp.controller('TabCtrl', ['$scope', '$location',
+quizeditorApp.controller('NavCtrl', ['$scope', '$location',
   function($scope, $location) {
     $scope.isActive = function(viewLocation) {
       return viewLocation === $location.path();

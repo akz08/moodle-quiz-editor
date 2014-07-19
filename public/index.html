@@ -21,23 +21,10 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="header" ng-controller="TabCtrl">
-        <ul class="nav nav-pills pull-right">
-          <li ng-class="{ active: isActive('/') }"><a ng-href="#">Home</a></li>
-          <li ng-class="{ active: isActive('/about') }"><a ng-href="#/about">About</a></li>
-          <li ng-class="{ active: isActive('/contact') }"><a ng-href="#/contact">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">Moodle Quiz Editor</h3>
-      </div>
+    
 
-      <div ng-view=""></div>
-
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-copyright-mark"></span> 2014, Amer Kamil Zainal</p>
-      </div>
-    </div>
-
+    <div ng-include="'views/nav.html'"></div>
+    <div class="container" ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
