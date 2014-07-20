@@ -22,9 +22,12 @@
 
     <!-- Add your site or application content here -->
     
-
-    <div ng-include="'views/nav.html'"></div>
-    <div class="container" ng-view=""></div>
+    <header>
+      <div ng-include="'views/nav.html'"></div>
+    </header>
+    <section class="mainContent">
+      <div ng-view=""></div>
+    </section>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>

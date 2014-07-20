@@ -1,6 +1,6 @@
 'use strict';
 
-quizeditorApp.controller('MainCtrl', ['$scope', 'Questions', 
+quizeditorApp.controller('SummaryCtrl', ['$scope', 'Questions', 
 	function ($scope, Questions) {
 
     $scope.question = {title: "", type: "trueFalse"};
