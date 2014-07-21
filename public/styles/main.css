@@ -35,8 +35,7 @@ form div.row {
 */
 
 section.question-sidebar {
-    display: flex;
-    flex-direction: column;
+    display: -webkit-box;
 }
 
 form.create-question{
@@ -62,7 +61,6 @@ form.create-question{
     padding: 5px;
     overflow-y: scroll;
     width: 300px;
-/*    height: 84%;*/
     background: #e4e4e4;
 }
 
