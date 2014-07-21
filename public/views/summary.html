@@ -1,50 +1,54 @@
 <section class="question-sidebar">
 
-<form class="form-horizontal create-question" ng-submit="createQuestion()">
-    <div class="form-group">
-        <div class="col-sm-12">
-            <input type="text" placeholder="Question title" class="form-control" ng-model="question.title">
+    <form class="form-horizontal create-question" ng-submit="createQuestion()">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="text" placeholder="Question title" class="form-control" ng-model="question.title">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-8">
-            <select class="form-control" ng-model="question.type">
-                <option value="calculated">Calculated</option>
-                <option value="description">Description</option>
-                <option value="essay">Essay</option>
-                <option value="matching">Matching</option>
-                <option value="embeddedAnswers">Embedded Answers</option>
-                <option value="multipleChoice">Multiple Choice</option>
-                <option value="shortAnswer">Short Answer</option>
-                <option value="numerical">Numerical</option>
-                <option value="trueFalse">True/False</option>
-            </select>
+        <div class="form-group">
+            <div class="col-sm-8">
+                <select class="form-control" ng-model="question.type">
+                    <option value="calculated">Calculated</option>
+                    <option value="description">Description</option>
+                    <option value="essay">Essay</option>
+                    <option value="matching">Matching</option>
+                    <option value="embeddedAnswers">Embedded Answers</option>
+                    <option value="multipleChoice">Multiple Choice</option>
+                    <option value="shortAnswer">Short Answer</option>
+                    <option value="numerical">Numerical</option>
+                    <option value="trueFalse">True/False</option>
+                </select>
+            </div>
+            <div class="form-group">
+            <div class="col-sm-4">
+                <input type="submit" class="btn btn-primary btn-block" value="Submit">
+                </div>
+            </div>
         </div>
-        <div class="col-sm-4">
-            <input type="submit" class="btn btn-primary btn-block" value="Submit">
-        </div>
-    </div>
-</form>
+        <!-- /#form-group -->
+    </form>
 
-<section class="question-list">
- 	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Title</th>
-				<th>Type</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="question in questions">
-				<td>{{question.id}}</td>
-				<td>{{question.title}}</td>
-				<td>{{question.type}}</td>
-				<td><a ng-click="deleteQuestion(question)">x</a></td>
-			</tr>
-		</tbody>
-	</table> 
+    <section class="question-list">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="question in questions">
+                    <td>{{question.id}}</td>
+                    <td>{{question.title}}</td>
+                    <td>{{question.type}}</td>
+                    <td><a ng-click="deleteQuestion(question)">x</a></td>
+                </tr>
+            </tbody>
+        </table> 
+    </section>
+    <!-- /#question-list -->
 
 </section>
-
-</section>
+<!-- /#question-sidebar -->

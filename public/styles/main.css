@@ -1,58 +1,47 @@
-html {
+/* Set height to 100% to fill browser window */
+html, body, .main-content {
     height: 100%;
 }
 
-/* Space out content a bit */
+/* Pad the top to the size of the Bootstrap navbar */
 body {
-    height: 100%;
     padding-top: 50px;
     overflow: hidden;
-    box-sizing: border-box;
 }
 
-section.main-content {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  padding-bottom: 0px;
+.navbar .container {
+    width: 100%;
 }
 
-section.main-content div {
-  display: -webkit-box; 
+/* Main content area (i.e. non-navbar) */
+.main-content {
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 0px;
 }
 
-/*
-section.mainContent div{
-    height: 100%;
+/* Set display to -webkit-box to fill the vertical space */
+.main-content, .main-ng-view {
+    display: -webkit-box; 
 }
 
-form div.row {
-    padding: 1px;
-}
-*/
-
-section.question-sidebar {
+/* Question summary and quick creation sidebar */
+.sidebar-container, .question-sidebar {
     display: -webkit-box;
 }
 
 form.create-question{
-/*    box-sizing: content-box;*/
-/*
-    flex-direction: row;
-    flex-wrap: wrap;
-*/
     position:fixed;
     padding: 1px;
-    height: 80px;
+/*    height: 80px;*/
     width: 300px;
     background-color: #c7c7c7;
 }
 
-.form-group{
-    margin: 3px 0px;
+.create-question .form-group{
+    margin: 2px 0px;
 }
 
 .question-list {
@@ -64,4 +53,21 @@ form.create-question{
     background: #e4e4e4;
 }
 
+/* Media query to adapt to Bootstrap's reponsive grid */
+@media(max-width:768px){
+    .question-list {
+        margin-top: 114px;
+    }
+}
 
+/* Main view */
+.main-container, .detail-view {
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+}
+
+.detail-view {
+    -webkit-box-orient: vertical;
+    padding: 10px;
+    overflow-y: scroll;
+}
