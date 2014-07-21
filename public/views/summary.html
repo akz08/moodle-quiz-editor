@@ -1,14 +1,13 @@
-<form class="form-horizontal" ng-submit="createQuestion()">
-    <fieldset>
-    <div class="control-group">
-        <div class="controls">
-            <div class="row">
-                <div class="col-xs-12">
+<section class="question-sidebar">
+
+<form class="form-horizontal create-question" ng-submit="createQuestion()">
+    <div class="form-group">
+        <div class="col-sm-12">
             <input type="text" placeholder="Question title" class="form-control" ng-model="question.title">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-8">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-8">
             <select class="form-control" ng-model="question.type">
                 <option value="calculated">Calculated</option>
                 <option value="description">Description</option>
@@ -20,17 +19,14 @@
                 <option value="numerical">Numerical</option>
                 <option value="trueFalse">True/False</option>
             </select>
-                </div>
-            <div class="col-xs-4">
+        </div>
+        <div class="col-sm-4">
             <input type="submit" class="btn btn-primary btn-block" value="Submit">
-                </div>
-            </div>
         </div>
     </div>
-    </fieldset>
 </form>
 
-<section class="summaries pull-left">
+<section class="question-list">
  	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -48,5 +44,7 @@
 			</tr>
 		</tbody>
 	</table> 
+
 </section>
 
+</section>
