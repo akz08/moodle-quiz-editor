@@ -5,7 +5,7 @@ html, body, .main-content {
 
 /* Pad the top to the size of the Bootstrap navbar */
 body {
-    padding-top: 50px;
+    padding-top: 50px; 
     overflow: hidden;
 }
 
@@ -32,10 +32,12 @@ body {
     display: -webkit-box;
 }
 
+.question-sidebar {
+    -webkit-box-orient: vertical;
+}
+
 form.create-question{
-    position:fixed;
     padding: 1px;
-/*    height: 80px;*/
     width: 300px;
     background-color: #c7c7c7;
 }
@@ -45,19 +47,11 @@ form.create-question{
 }
 
 .question-list {
-    box-sizing: border-box;
-    margin-top: 80px;
+    -webkit-box-flex: 1;
     padding: 5px;
     overflow-y: scroll;
     width: 300px;
     background: #e4e4e4;
-}
-
-/* Media query to adapt to Bootstrap's reponsive grid */
-@media(max-width:768px){
-    .question-list {
-        margin-top: 114px;
-    }
 }
 
 /* Main view */
