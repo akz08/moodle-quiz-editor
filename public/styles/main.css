@@ -15,28 +15,30 @@ body {
 
 /* Main content area (i.e. non-navbar) */
 .main-content {
-    display: -webkit-box;
-    -webkit-box-orient: horizontal;
+    display: flex;
     overflow: hidden;
     width: 100%;
     padding-bottom: 0px;
 }
 
-/* Set display to -webkit-box to fill the vertical space */
+/* Set display to flex to fill the vertical space */
 .main-content, .main-ng-view {
-    display: -webkit-box; 
+    display: flex;
 }
 
 /* Question summary and quick creation sidebar */
 .sidebar-container, .question-sidebar {
-    display: -webkit-box;
+    display: flex;
 }
 
 .question-sidebar {
-    -webkit-box-orient: vertical;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
 }
 
 form.create-question{
+    flex: 0 1 auto;
     padding: 1px;
     width: 300px;
     background-color: #c7c7c7;
@@ -47,7 +49,7 @@ form.create-question{
 }
 
 .question-list {
-    -webkit-box-flex: 1;
+    flex: 1 1 0;
     padding: 5px;
     overflow-y: scroll;
     width: 300px;
@@ -56,12 +58,12 @@ form.create-question{
 
 /* Main view */
 .main-container, .detail-view {
-    display: -webkit-box;
-    -webkit-box-flex: 1;
+    display: flex;
+    flex: 1 1 0;
 }
 
 .detail-view {
-    -webkit-box-orient: vertical;
+    flex-direction: column;
     padding: 10px;
     overflow-y: scroll;
 }
