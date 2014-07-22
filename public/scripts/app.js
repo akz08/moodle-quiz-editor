@@ -32,7 +32,13 @@ quizeditorApp.config(['$routeProvider',
         controller: 'AboutCtrl'
       })
       .when('/contact', {
-        templateUrl: 'views/contact.html',
+        templateUrl: 'views/contact.html'
+      })
+      .when('/settings', {
+        templateUrl: 'views/settings.html'
+      })
+      .when('/help', {
+        templateUrl: 'views/help.html'
       })
       .otherwise({
         redirectTo: '/'
