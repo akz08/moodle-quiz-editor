@@ -15,6 +15,7 @@ body {
 
 /* Main content area (i.e. non-navbar) */
 .main-content {
+    display: -webkit-flex;
     display: flex;
     overflow: hidden;
     width: 100%;
@@ -23,21 +24,27 @@ body {
 
 /* Set display to flex to fill the vertical space */
 .main-content, .main-ng-view {
+    display: -webkit-flex;
     display: flex;
 }
 
 /* Question summary and quick creation sidebar */
 .sidebar-container, .question-sidebar {
+    display: -webkit-flex;
     display: flex;
 }
 
 .question-sidebar {
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
     flex-direction: column;
+    -webkit-flex: 1 1 0;
     flex: 1 1 0;
 }
 
 form.create-question{
+    -webkit-flex: 0 1 auto;
     flex: 0 1 auto;
     padding: 1px;
     width: 300px;
@@ -49,6 +56,7 @@ form.create-question{
 }
 
 .question-list {
+    -webkit-flex: 1 1 0;
     flex: 1 1 0;
     padding: 5px;
     overflow-y: scroll;
@@ -58,11 +66,14 @@ form.create-question{
 
 /* Main view */
 .main-container, .detail-view {
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex: 1 1 0;
     flex: 1 1 0;
 }
 
 .detail-view {
+    -webkit-flex-direction: column;
     flex-direction: column;
     padding: 10px;
     overflow-y: scroll;
