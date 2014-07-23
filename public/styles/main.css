@@ -9,11 +9,7 @@ body {
     overflow: hidden;
 }
 
-.navbar .container {
-    width: 100%;
-}
-
-/* Main content area (i.e. non-navbar) */
+/* MAIN CONTENT AREA (i.e. non-navbar) */
 .main-content {
     display: -webkit-flex;
     display: flex;
@@ -22,14 +18,9 @@ body {
     padding-bottom: 0px;
 }
 
-/* Set display to flex to fill the vertical space */
-.main-content, .main-ng-view {
-    display: -webkit-flex;
-    display: flex;
-}
 
-/* Question summary and quick creation sidebar */
-.sidebar-container, .question-sidebar {
+/* SIDEBAR */
+.sidebar-container {
     display: -webkit-flex;
     display: flex;
 }
@@ -43,7 +34,8 @@ body {
     flex: 1 1 0;
 }
 
-form.create-question{
+/* Set a fixed size nav at the top of the sidebar */
+.sidebar-static{
     -webkit-flex: 0 1 auto;
     flex: 0 1 auto;
     padding: 1px;
@@ -51,11 +43,12 @@ form.create-question{
     background-color: #c7c7c7;
 }
 
-.create-question .form-group{
+#create-question .form-group{
     margin: 2px 0px;
 }
 
-.question-list {
+/* Set a scrollable nav below */
+.sidebar-scrollable {
     -webkit-flex: 1 1 0;
     flex: 1 1 0;
     padding: 5px;
@@ -64,15 +57,16 @@ form.create-question{
     background: #e4e4e4;
 }
 
-/* Main view */
-.main-container, .detail-view {
+/* MAIN EDITOR */
+.editor-container{
     display: -webkit-flex;
     display: flex;
     -webkit-flex: 1 1 0;
     flex: 1 1 0;
 }
 
-.detail-view {
+/* Genertic question editor */
+.question-editor {
     -webkit-flex-direction: column;
     flex-direction: column;
     padding: 10px;

@@ -23,6 +23,7 @@ quizeditorApp.controller('MainCtrl', ['$scope', 'Questions',
       });
     }
 
+    $scope.selectedQuestion = {title: "", type: ""};
   }]);
 
 quizeditorApp.controller('NavCtrl', ['$scope', '$location',

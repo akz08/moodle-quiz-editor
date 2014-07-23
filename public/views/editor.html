@@ -1,4 +1,4 @@
-<section class="detail-view">
+<div class="question-editor container">
     <h1>A header about question details</h1>
     <p>Lorem ipsum dolor sit amet, no legere soluta ocurreret vix. No vix rationibus assueverit vituperatoribus, cu sea quod habeo accusam, animal singulis sed ex. Mei te ornatus comprehensam, cu purto periculis laboramus qui. Ne est lucilius ullamcorper philosophia.
 
@@ -9,4 +9,14 @@
     Eros perpetua id eos, ex mollis oportere prodesset vis, clita apeirian conceptam in vel. Ei nibh magna soluta qui, diam erant comprehensam at mel, cu quem latine liberavisse usu. Iusto dicunt officiis per ex, eu vel clita accommodare comprehensam, sit eu putant prompta voluptatibus. Quo id vero natum dicat.
 
     Alia stet ex est, sint albucius complectitur mei at. Verear tacimates referrentur vix ut, mea no quem diam cibo. Vis iisque abhorreant no, in dicam doming pro. Augue sanctus saperet mea ei. Nulla ludus id vix, eripuit feugait recteque est at, purto ipsum usu et. Docendi sententiae et duo.</p>
-</section>
+
+    <form method="post">
+    	<textarea ui-tinymce ng-model="tinymceModel"></textarea>
+    </form>
+
+   <p> {{ tinymceModel }} </p>
+    
+    {{ selectedQuestion.title }}
+    {{ selectedQuestion.type }}
+</div>
+<!-- ./question-editor -->
