@@ -1,4 +1,4 @@
-<div class="question-sidebar">
+<div class="question-sidebar" ng-controller="SidebarCtrl">
 
     <div class="sidebar-static">
         <form id="create-question" class="form-horizontal" ng-submit="createQuestion()">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                 <div class="col-sm-4">
-                    <input type="submit" class="btn btn-primary btn-block" value="Submit">
+                    <input type="submit" class="btn btn-primary btn-sm btn-block" value="Submit">
                     </div>
                 </div>
             </div>
@@ -55,13 +55,13 @@
 -->
         <div class="btn-group btn-group-justified" ng-repeat="question in questions">
           <div class="btn-group">
-            <button type="button" class="btn btn-default">{{ question.title }}</button>
+            <button type="button" class="btn btn-default btn-sm">[{{ question.id }}] {{ question.title }}</button>
           </div>
           <div class="btn-group">
-            <button type="button" class="btn btn-primary">Edit</button>
+            <button type="button" class="btn btn-primary btn-sm" ng-click="setProperty(question.id)">Edit</button>
           </div>
           <div class="btn-group">
-            <button type="button" class="btn btn-danger" ng-click="deleteQuestion(question)">Delete</button>
+            <button type="button" class="btn btn-danger btn-sm" ng-click="deleteQuestion(question)">Delete</button>
           </div>
         </div>
     </div>

@@ -5,7 +5,10 @@ html, body, .main-content {
 
 /* Pad the top to the size of the Bootstrap navbar */
 body {
-    padding-top: 50px; 
+    /* Bootstrap */
+/*    padding-top: 50px;*/
+    /* Bootswatch Yeti */
+    padding-top: 45px; 
     overflow: hidden;
 }
 
