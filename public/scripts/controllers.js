@@ -32,10 +32,21 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         var i = $scope.questions.indexOf(question);
         $scope.questions.splice(i, 1);
       });
-
     };
-  }]);
 
-quizeditorApp.controller('EditorCtrl', [
-  function() {
+    $scope.editQuestion = function(question) {
+      Questions.edit(question);
+    };
+
+  }])
+
+.controller('EditorCtrl', ['$scope', 'Questions',
+  function($scope, Questions) {
+    $scope.question = 'dummy';
+
+    var updateQuestion = function() {
+      $scope.question = Questions.getCurrent();
+    };
+
+    Questions.registerEditObserverCallback(updateQuestion);
 }]);
