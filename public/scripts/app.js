@@ -29,8 +29,7 @@ quizeditorApp.config(['$routeProvider',
         controller: 'MainCtrl'
       })
       .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+        templateUrl: 'views/about.html'
       })
       .when('/contact', {
         templateUrl: 'views/contact.html'
@@ -44,4 +43,4 @@ quizeditorApp.config(['$routeProvider',
       .otherwise({
         redirectTo: '/'
       });
-  }]);
+}]);

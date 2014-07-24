@@ -1,13 +1,15 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe 'Quiz Editor' do
+describe 'Quiz Editor API' do
 
-	def app
-		Sinatra::Application
-	end	
+	describe "GET /api/questions" do
 
-	it 'should' do
-		get '/'
-		expect(last_response).to be_ok
+		before(:example) { get '/api/questions' }
+		let(:json) { JSON.parse last_response.body }
+
+		it 'responds successfully' do
+			expect(last_response).to be_ok
+		end
+
 	end
 end
