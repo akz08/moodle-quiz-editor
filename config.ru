@@ -1,5 +1,8 @@
 require File.expand_path('../app.rb', __FILE__)
 require 'sinatra'
+require 'rack-livereload'
+
+use Rack::LiveReload
 use Rack::ShowExceptions
 
 set :environment, ENV['RACK_ENV'].to_sym

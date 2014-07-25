@@ -1,10 +1,10 @@
-require 'rubygems'
-require 'sinatra'
-require 'data_mapper'
-require 'json'
+ENV['RACK_ENV'] ||= 'development'
 
+require 'bundler'
+Bundler.require
 
-# DataMapper::Logger.new($stdout, :debug)
+enable :sessions
+register Sinatra::Flash
 
 DataMapper.setup(:default, 'mysql://root:uclthesis@localhost/moodle_quiz_editor')
 
@@ -22,4 +22,4 @@ require './helpers/init'
 require './routes/init'
 
 DataMapper.finalize
-
+DataMapper.auto_upgrade!
