@@ -11,6 +11,7 @@ gem 'sinatra-contrib'
 gem 'sinatra-flash'
 gem 'warden'
 gem 'bcrypt'
+gem 'builder'
 
 group :development do
 	gem 'guard', require: false

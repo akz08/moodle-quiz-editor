@@ -6,6 +6,7 @@ GEM
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
+    builder (3.2.2)
     celluloid (0.15.2)
       timers (~> 1.1.0)
     coderay (1.1.0)
@@ -145,6 +146,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  builder
   data_mapper
   dm-mysql-adapter
   dm-sqlite-adapter
