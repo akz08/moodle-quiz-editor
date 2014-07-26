@@ -47,6 +47,10 @@ quizeditorApp.factory('Questions', ['Restangular',
 			getCurrent: function() {
 				return currentQuestion;
 			},
+			getCurrentMoodleXmlUrl: function() {
+				// returns the base Moodle XML url. need to incorporate /export?type=moodle_xml in somehow.
+				return restAngular.one('questions', currentQuestion.id).getRestangularUrl();
+			},
 			getAll: function() {
 				return _Questions.getList();			
 			},
