@@ -1,31 +1,17 @@
-require File.expand_path('../app.rb', __FILE__)
-require 'sinatra'
-require 'rack-livereload'
+require "./app_api"
+require "./app_frontend"
 
-use Rack::LiveReload
-use Rack::ShowExceptions
+# Frontend app
+map "/" do
 
-set :environment, ENV['RACK_ENV'].to_sym
+	map "/bower_components" do
+		run Rack::Directory.new("./bower_components")
+	end
 
-# map the resource directories
-map "/bower_components" do
-	run Rack::Directory.new("./bower_components")
+	run FrontEnd::App
 end
 
-map "/styles" do
-	run Rack::Directory.new("./public/styles")
+# API app
+map "/api" do
+	run QuizEditor::App 
 end
-
-map "/scripts" do
-	run Rack::Directory.new("./public/scripts")
-end
-
-map "/views" do
-	run Rack::Directory.new("./public/views")
-end
-
-map "/images" do
-	run Rack::Directory.new("./public/images")
-end
-
-run Sinatra::Application

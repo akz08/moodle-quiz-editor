@@ -7,10 +7,12 @@ bower_components
 .vagrant
 .DS_STORE
 
+db/*.db
 logs/*
 pids/*
 tmp/*
 
+*.db
 *.log
 *.swp
 *.rbc

@@ -1,9 +1,22 @@
 ENV['RACK_ENV'] = 'test'
 
-require 'bundler'
-Bundler.require :test
+require "rubygems"
+require "bundler"
 
-require_relative '../app'
+Bundler.setup(:default, :test)
+
+require "database_cleaner"
+require "factory_girl"
+FactoryGirl.definition_file_paths = %w{./factories ./test/factories ./spec/factories}
+FactoryGirl.find_definitions
+Dir[File.dirname(__FILE__)+"/support/*.rb"].each {|file| require file }
+
+require "rspec"
+require "rack/test"
+require "sinatra"
+require "sinatra/activerecord"
+	
+require_relative "../app_api"
 
 set :environment, :test
 
@@ -28,13 +41,29 @@ def json(hash)
 end
 
 def app
-	Sinatra::Application
+	QuizEditor::App 
 end
 
 RSpec.configure do |config|
 	config.include Rack::Test::Methods
+	# config.include FactoryGirl::Syntax::Methods # was causing problems...
 
 	config.color = true
 
-	config.before(:each) { DataMapper.auto_migrate! }
+	config.before(:suite) do
+		# FactoryGirl.lint
+		DatabaseCleaner.strategy = :transaction
+		DatabaseCleaner.clean_with :transaction
+
+	end
+
+	config.before(:each) do
+		DatabaseCleaner.start
+	end
+
+	config.after(:each) do
+		DatabaseCleaner.clean
+	end
 end
+
+FactoryGirl.register_strategy(:json, JsonStrategy)

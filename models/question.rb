@@ -1,8 +1,4 @@
-#encoding UTF-8
-class Question
-	include DataMapper::Resource
-
-	property :id,			Serial
-	property :title,		String
-	property :type,			String
+class Question < ActiveRecord::Base
+ # attr_accessible :title, :type
+  # empty class
 end

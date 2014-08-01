@@ -14,7 +14,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
 .controller('SidebarCtrl', ['$scope', 'Questions',
   function($scope, Questions) {
-    $scope.question = {title: '', type: 'trueFalse'};
+    $scope.question = {q_title: '', q_type: 'trueFalse'};
 
     Questions.getAll().then(function(questions) {
       $scope.questions = questions;
@@ -23,7 +23,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     $scope.createQuestion = function() {
       Questions.create($scope.question).then(function(question) {
         $scope.questions.push(question);
-        $scope.question = {title: '', type: 'trueFalse'};
+        $scope.question = {q_title: '', q_type: 'trueFalse'};
       });
     };
 
@@ -43,8 +43,8 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
 .controller('EditorCtrl', ['$scope', '$window', 'Questions',
   function($scope, $window, Questions) {
-    $scope.question = {'title': 'default title',
-                      'type': 'default type'};
+    $scope.question = {'q_title': 'default title',
+                      'q_type': 'default type'};
 
     var updateQuestion = function() {
       $scope.question = Questions.getCurrent();
