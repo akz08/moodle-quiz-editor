@@ -7,6 +7,8 @@ deploy:
   redeployment_hook: "https://hooks.cloud66.com/stacks/redeploy/c88ff1accd5c4f934664e7b39e4e1d54/3e4137f8419d0dcfbc81331742da5043"
   on: development
 
-before_script: bundle exec rake RACK_ENV=test db:migrate
+before_script: 
+  - bundle exec rake RACK_ENV=test db:migrate
 
-script: bundle exec rspec spec
+script: 
+  - bundle exec rspec spec
