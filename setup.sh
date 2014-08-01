@@ -28,11 +28,8 @@ debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again pa
 
 # Install MySQL 5.5
 apt-get install -y mysql-server-5.5
-# setup default database
+# setup default database (now redundant with ActiveRecord)
 mysql -uroot -puclthesis -e "CREATE DATABASE moodle_quiz_editor;"
-
-# Install DataMapper dependency for dm-mysql-adapter
-apt-get install -y libmysqlclient-dev
 
 # Install SQLite (testing)
 apt-get install -y libsqlite3-dev
@@ -43,4 +40,4 @@ cd /vagrant
 bundle install
 npm install --no-bin-links
 bower install --allow-root| xargs echo
-bundle exec rake db:upgrade;
+bundle exec rake db:setup;
