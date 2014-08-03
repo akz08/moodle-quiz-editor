@@ -20,7 +20,7 @@ module QuizEditor
 						content_type :xml
 						attachment "moodlexml_question#{params[:format]}.xml"
 
-						"#{generate_moodle_xml("category", question.q_type, question.q_title)}"
+						"#{generate_moodle_xml("category", question.q_type, question.q_name)}"
 					else
 						halt 404
 					end
@@ -29,7 +29,7 @@ module QuizEditor
 				post '/questions' do
 					body = MultiJson.load request.body.read
 					question = Question.new(
-						:q_title =>	body['q_title'],
+						:q_name =>	body['q_name'],
 						:q_type => 	body['q_type']
 					)
 					if question.save
@@ -45,7 +45,7 @@ module QuizEditor
 					question = question_by_id(params[:id])
 
 					halt 500 unless question.update(
-						:q_title => 	body['q_title'],
+						:q_name => 	body['q_name'],
 						:q_type =>		body['q_type']
 					)
 					format_response(question, request.accept)

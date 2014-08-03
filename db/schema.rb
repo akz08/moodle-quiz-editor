@@ -14,10 +14,12 @@
 ActiveRecord::Schema.define(version: 20140730233744) do
 
   create_table "questions", force: true do |t|
-    t.string   "q_title"
+    t.string   "q_name"
     t.string   "q_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "questions", ["q_name"], name: "index_questions_on_q_name"
 
 end

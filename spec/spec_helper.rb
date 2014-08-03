@@ -20,6 +20,13 @@ require_relative "../app_api"
 
 set :environment, :test
 
+# Automigrate if necessary (since we're using the test environment)
+if ActiveRecord::Migrator.needs_migration?
+	ActiveRecord::Migrator.migrate(File.join('./', 'db/migrate'))
+end
+
+# JSON helpers
+
 def get_json(path)
 	get path
 	json_parse(last_response.body)
@@ -44,6 +51,8 @@ def app
 	QuizEditor::App 
 end
 
+# Configure RSpec and FactoryGirl
+
 RSpec.configure do |config|
 	config.include Rack::Test::Methods
 	# config.include FactoryGirl::Syntax::Methods # was causing problems...
@@ -51,7 +60,6 @@ RSpec.configure do |config|
 	config.color = true
 
 	config.before(:suite) do
-		# FactoryGirl.lint
 		DatabaseCleaner.strategy = :transaction
 		DatabaseCleaner.clean_with :transaction
 
