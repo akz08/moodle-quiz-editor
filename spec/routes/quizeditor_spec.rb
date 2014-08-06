@@ -8,7 +8,7 @@ describe "QuizEditor API" do
 		before(:each) do
 			test = post_json('/questions', {
 					q_name: "Question Title",
-					q_type: "trueFalse"
+					q_type: "true_false"
 			})
 		end
 
@@ -17,7 +17,7 @@ describe "QuizEditor API" do
 		it 'should return the posted object' do 
 			expect(last_response).to be_successful
 			expect(resp[:q_name]).to eq("Question Title")
-			expect(resp[:q_type]).to eq("trueFalse")
+			expect(resp[:q_type]).to eq("true_false")
 		end
 
 	end
