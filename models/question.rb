@@ -5,8 +5,8 @@ class Question < ActiveRecord::Base
 	has_and_belongs_to_many :categories
 
 	# Validation
-	valid_types = [ "calculated", "description", "essay", "matching", "embeddedAnswers", 
-					"multipleChoice", "shortAnswer", "numerical", "trueFalse" ]
+	valid_types = [ "calculated", "description", "essay", "matching", "embedded_answers", 
+					"multiple_choice", "short_answer", "numerical", "true_false" ]
 
 	validates :q_name, presence: true
 	validates :q_type, presence: true, 
