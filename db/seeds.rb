@@ -1,3 +1,2 @@
-#3.times do |i|
-#  Question.create(title: "Title ##{i}", type: "Type ##{i}")
-#end
+# Default admin user account
+User.create(u_email: "admin@admin.com", u_password: "encryptedPass")

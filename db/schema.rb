@@ -11,9 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140730233744) do
+ActiveRecord::Schema.define(version: 20140805120436) do
+
+  create_table "categories", force: true do |t|
+    t.string   "c_name"
+    t.text     "c_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories_questions", id: false, force: true do |t|
+    t.integer "category_id"
+    t.integer "question_id"
+  end
+
+  create_table "multiple_choice_answers", force: true do |t|
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "questions", force: true do |t|
+    t.integer  "user_id"
     t.string   "q_name"
     t.string   "q_type"
     t.datetime "created_at"
@@ -21,5 +40,21 @@ ActiveRecord::Schema.define(version: 20140730233744) do
   end
 
   add_index "questions", ["q_name"], name: "index_questions_on_q_name"
+
+  create_table "true_false_answers", force: true do |t|
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "u_name"
+    t.string   "u_email"
+    t.string   "u_password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["u_name"], name: "index_users_on_u_name"
 
 end

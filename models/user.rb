@@ -1,9 +1,8 @@
-#encoding UTF-8
-class User
-	include DataMapper::Resource
-	include BCrypt
+class User < ActiveRecord::Base
+	# Association
+	has_many :questions, dependent: :destroy
 
-	property :id,			Serial,	:key => true
-	property :username,		String,	:length => 3..50 # minimum 3 chars
-	property :password,		BCryptHash
+	# Validation
+	validates :u_email, presence: true
+	validates :u_password, presence: true
 end
