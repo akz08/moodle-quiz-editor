@@ -13,6 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20140805120436) do
 
+  create_table "answers", force: true do |t|
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "categories", force: true do |t|
     t.string   "c_name"
     t.text     "c_description"
@@ -25,12 +31,6 @@ ActiveRecord::Schema.define(version: 20140805120436) do
     t.integer "question_id"
   end
 
-  create_table "multiple_choice_answers", force: true do |t|
-    t.integer  "question_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "questions", force: true do |t|
     t.integer  "user_id"
     t.string   "q_name"
@@ -39,13 +39,7 @@ ActiveRecord::Schema.define(version: 20140805120436) do
     t.datetime "updated_at"
   end
 
-  add_index "questions", ["q_name"], name: "index_questions_on_q_name"
-
-  create_table "true_false_answers", force: true do |t|
-    t.integer  "question_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "questions", ["q_name"], name: "index_questions_on_q_name", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "u_name"
@@ -55,6 +49,6 @@ ActiveRecord::Schema.define(version: 20140805120436) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["u_name"], name: "index_users_on_u_name"
+  add_index "users", ["u_name"], name: "index_users_on_u_name", using: :btree
 
 end

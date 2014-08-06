@@ -13,11 +13,11 @@ class Question < ActiveRecord::Base
   				inclusion: { in: valid_types,
   					message: "%{value} is not a valid type" }
 
-  	# Defaults (to stub out user_id)
-  	after_initialize :defaults
+  # Defaults (to stub out user_id)
+  after_initialize :defaults
 
-  	def defaults
-  		# Defaults to the seeded admin account
-  		self.user_id ||= 1
-  	end	
+	def defaults
+ 		# Defaults to the seeded admin account
+ 		self.user_id ||= 1
+ 	end	
 end
