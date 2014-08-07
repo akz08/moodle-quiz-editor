@@ -4,14 +4,17 @@ module QuizEditor
 	  	helpers Helpers::GenerateMoodleXmlHelper
 
 			## Questions
+			# GET all available questions
 			get '/questions' do
 				format_response(Question.all, request.accept)
 			end
 
+			# GET a specific question
 			get '/questions/:q_id' do
 				format_response(question_by_id(params[:q_id]), request.accept)
 			end
 
+			# GET a question and export it to a given type
 			get '/questions/:q_id/export' do 
 				if params[:type] == "moodle_xml" then
 					question = question_by_id(params[:q_id])
@@ -25,6 +28,7 @@ module QuizEditor
 				end
 			end
 
+			# PUT new values into a specific question
 			put '/questions/:q_id' do
 				question = question_by_id(params[:q_id])
 
@@ -36,6 +40,7 @@ module QuizEditor
 				format_response(question, request.accept)
 			end
 
+			# POST a new question
 			post '/questions' do
 				body = MultiJson.load request.body.read
 				question = Question.new(
@@ -50,6 +55,7 @@ module QuizEditor
 				end
 			end
 
+			# DELETE a specific question
 			delete '/questions/:q_id' do
 				halt 500 unless question_by_id(params[:q_id]).destroy
 			end
@@ -59,17 +65,20 @@ module QuizEditor
 			end
 
 			## Question Answers
+			# GET all answers of a given question
 			get '/questions/:q_id/answers' do
 				question = question_by_id(params[:q_id])
 				format_response(question.answers, request.accept)
 			end
 
+			# GET a specific answer of a given question
 			get '/questions/:q_id/answers/:a_id' do 
 				question = question_by_id(params[:q_id])
 				answer = answer_by_id(question, params[:a_id])
 				format_response(answer, request.accept)
 			end
 
+			# PUT new values into a specific answer
 			put '/questions/:q_id/answers/:a_id' do
 				question = question_by_id(params[:q_id])
 				answer = answer_by_id(question, params[:a_id])
@@ -84,6 +93,7 @@ module QuizEditor
 				format_response(answer, request.accept)
 			end
 
+			# POST a new answer to a given question
 			post '/questions/:q_id/answers' do
 				question = question_by_id(params[:q_id])
 
