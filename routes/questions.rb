@@ -60,10 +60,6 @@ module QuizEditor
 				halt 500 unless question_by_id(params[:q_id]).destroy
 			end
 
-			after do
-				ActiveRecord::Base.connection.close
-			end
-
 			## Question Answers
 			# GET all answers of a given question
 			get '/questions/:q_id/answers' do
@@ -110,6 +106,15 @@ module QuizEditor
 				else 
 					status 400
 				end
+			end
+
+			# DELETE a specific answer
+			delete '/questions/:q_id/answers/:a_id' do
+				halt 500 unless answer_by_id(question_by_id(params[:q_id], params[:a_id])).destroy
+			end
+
+			after do
+				ActiveRecord::Base.connection.close
 			end
 
 			## Helpers
