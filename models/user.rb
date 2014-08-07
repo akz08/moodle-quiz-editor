@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-	# Association
+	## Association
 	has_many :questions, dependent: :destroy
 
-	# Validation
+	## Validation
 	validates :u_email, presence: true
 	validates :u_password, presence: true
 end

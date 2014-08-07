@@ -1,8 +1,8 @@
-# In Moodle, question categories can be nested. 
-# For simplicity, this is not currently supported.
+# @note In Moodle, question categories can be nested. 
+#   For simplicity, this is not currently supported.
 
 class Category < ActiveRecord::Base
-	# Association
+	## Association
 	has_and_belongs_to_many :questions
 
 end
