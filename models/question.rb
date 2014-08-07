@@ -1,10 +1,12 @@
 class Question < ActiveRecord::Base
-	# Association
+	## Association
 	belongs_to :user
 	has_many :answers, dependent: :destroy
 	has_and_belongs_to_many :categories
 
-	# Validation
+	## Validation
+  validates :user_id, presence: true
+
 	valid_types = [ "calculated", "description", "essay", "matching", "embedded_answers", 
 					"multiple_choice", "short_answer", "numerical", "true_false" ]
 
@@ -13,7 +15,7 @@ class Question < ActiveRecord::Base
   				inclusion: { in: valid_types,
   					message: "%{value} is not a valid type" }
 
-  # Defaults (to stub out user_id)
+  ## Defaults (to stub out user_id)
   after_initialize :defaults
 
 	def defaults

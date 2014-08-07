@@ -25,6 +25,17 @@ module QuizEditor
 				end
 			end
 
+			put '/questions/:q_id' do
+				question = question_by_id(params[:q_id])
+
+				body = MultiJson.load request.body.read
+				halt 500 unless question.update(
+					:q_name => 	body['q_name'],
+					:q_type =>	body['q_type']
+				)
+				format_response(question, request.accept)
+			end
+
 			post '/questions' do
 				body = MultiJson.load request.body.read
 				question = Question.new(
@@ -37,17 +48,6 @@ module QuizEditor
 				else
 					status 400
 				end
-			end
-
-			put '/questions/:q_id' do
-				body = MultiJson.load request.body.read
-				question = question_by_id(params[:q_id])
-
-				halt 500 unless question.update(
-					:q_name => 	body['q_name'],
-					:q_type =>		body['q_type']
-				)
-				format_response(question, request.accept)
 			end
 
 			delete '/questions/:q_id' do
@@ -68,6 +68,38 @@ module QuizEditor
 				question = question_by_id(params[:q_id])
 				answer = answer_by_id(question, params[:a_id])
 				format_response(answer, request.accept)
+			end
+
+			put '/questions/:q_id/answers/:a_id' do
+				question = question_by_id(params[:q_id])
+				answer = answer_by_id(question, params[:a_id])
+
+				body = MultiJson.load request.body.read
+				halt 500 unless answer.update(
+					:question_id	=> body['question_id'],	# to allow moving answers across questions
+					:a_answer			=> body['a_answer'],
+					:a_fraction		=> body['a_fraction'],
+					:a_feedback		=> body['a_feedback']
+				)
+				format_response(answer, request.accept)
+			end
+
+			post '/questions/:q_id/answers' do
+				question = question_by_id(params[:q_id])
+
+				body = MultiJson.load request.body.read
+				answer = Answer.new(
+					:question_id 	=> params[:q_id],
+					:a_answer			=> body['a_answer'],
+					:a_fraction		=> body['a_fraction'],
+					:a_feedback		=> body['a_feedback']
+				)
+				if answer.save
+					status 201
+					format_response(answer, request.accept)
+				else 
+					status 400
+				end
 			end
 
 			## Helpers
