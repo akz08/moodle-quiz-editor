@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140805120436) do
     t.integer  "user_id"
     t.string   "q_name"
     t.string   "q_type"
+    t.text     "q_body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

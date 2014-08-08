@@ -6,6 +6,7 @@ class CreateQuestions < ActiveRecord::Migration
 
       t.string :q_name
       t.string :q_type
+      t.text   :q_body
       t.timestamps
     end
     add_index :questions, :q_name

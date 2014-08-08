@@ -87,8 +87,11 @@ describe "QuizEditor API" do
 
 		let(:resp) { json_parse last_response.body }
 
-		it 'returns the posted question' do 
+		it 'responds successfully' do 
 			expect(last_response).to be_successful
+		end
+		
+		it 'returns the posted question' do 
 			expect(resp[:q_name]).to eq("Test Question Title")
 			expect(resp[:q_type]).to eq("multiple_choice")
 		end
