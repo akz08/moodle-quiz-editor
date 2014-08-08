@@ -37,7 +37,10 @@ def post_json(url, data)
 	json_parse(last_response.body)
 end
 
-# JSON helpers
+def put_json(url, data)
+	put(url, json(data), { "Content-Type" => "application/json" })
+	json_parse(last_response.body)
+end
 
 def json_parse(body)
 	MultiJson.load(body, symbolize_keys: true)
