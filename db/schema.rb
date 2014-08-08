@@ -15,6 +15,9 @@ ActiveRecord::Schema.define(version: 20140805120436) do
 
   create_table "answers", force: true do |t|
     t.integer  "question_id"
+    t.text     "a_answer"
+    t.decimal  "a_fraction"
+    t.text     "a_feedback"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,7 +42,7 @@ ActiveRecord::Schema.define(version: 20140805120436) do
     t.datetime "updated_at"
   end
 
-  add_index "questions", ["q_name"], name: "index_questions_on_q_name", using: :btree
+  add_index "questions", ["q_name"], name: "index_questions_on_q_name"
 
   create_table "users", force: true do |t|
     t.string   "u_name"
@@ -49,6 +52,6 @@ ActiveRecord::Schema.define(version: 20140805120436) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["u_name"], name: "index_users_on_u_name", using: :btree
+  add_index "users", ["u_name"], name: "index_users_on_u_name"
 
 end

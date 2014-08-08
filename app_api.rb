@@ -12,5 +12,6 @@ module QuizEditor
 	class App < Sinatra::Base
 		# Routes
 		use Routes::Questions
+    use Routes::Categories
 	end
 end
