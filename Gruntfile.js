@@ -7,6 +7,8 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
@@ -71,11 +73,20 @@ module.exports = function (grunt) {
         hostname: '0.0.0.0',
         livereload: 35729
       },
+      proxies: [
+        {
+          context: '/api',
+          host: '0.0.0.0',
+          port: 9393,
+          https: false
+        }
+      ],
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
             return [
+              proxySnippet,
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
@@ -368,6 +379,7 @@ module.exports = function (grunt) {
       'clean:server',
       'wiredep',
       'concurrent:server',
+      'configureProxies',
       'autoprefixer',
       'connect:livereload',
       'watch'
