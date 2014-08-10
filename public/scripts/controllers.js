@@ -31,6 +31,15 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       });
     };
 
+    $scope.putQuestion = function(oldQuestion, newQuestion) {
+      Questions.put(oldQuestion, newQuestion).then(function(question) {
+        // find the current question 
+        var index = $scope.questions.indexOf(oldQuestion);
+        // replace its value with the updated value
+        $scope.questions[index] = question;
+      });
+    };
+
     $scope.deleteQuestion = function(question) {
       Questions.delete(question.id).then(function() {
         var i = $scope.questions.indexOf(question);
@@ -91,20 +100,20 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         });
     };   
 
-    $scope.modalEditName = function(question) {
+    $scope.modalEditName = function(oldQuestion) {
 
       var modalInstance = $modal.open({
         templateUrl: 'views/modalEditName.html',
         controller: 'ModalEditNameCtrl',
         resolve: {
           question: function() {
-              return question;
+              return oldQuestion;
             }
         }
       });
 
-      modalInstance.result.then(function(question) {
-
+      modalInstance.result.then(function(newQuestion) {
+        $scope.putQuestion(oldQuestion, newQuestion);
       }, function() {
         console.log('Edit Modal Closed');
       });
@@ -169,9 +178,10 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
   function($scope, $modalInstance, question) {
 
     $scope.currentQuestion = question;
+    $scope.newQuestion = angular.copy(question);
 
     $scope.confirm = function() {
-
+      $modalInstance.close($scope.newQuestion);
     };
 
     $scope.cancel = function() {

@@ -65,9 +65,11 @@ quizeditorApp.factory('Questions', ['Restangular',
 				this.setCurrent(question); 
 				notifyEditObservers();
 			},
-			// this actually edits the question (some renaming is in order)
-			put: function() {
-
+			// this actually edits the question (some renaming is in order!)
+			put: function(oldQuestion, newQuestion) {
+				return oldQuestion.customPUT(newQuestion).then(function(result) {
+					return result;
+				});
 			},
 			delete: function(questionId) {
 				// get question by the given id, and delete if found

@@ -7,12 +7,12 @@ quizeditorApp.directive('layoutContainer', function() {
                 /*jshint camelcase: false */
 	        	element.layout({
 	                west: {
-	                  resizable : true,
-	                  initClosed : false,
-	                  livePaneResizing: true,
-	                  size: 300,
-                        minSize: 300,
-                        maxSize: 400,
+                        resizable : false,
+                        initClosed : false,
+                        // livePaneResizing: true,
+                        size: 300,
+                        // minSize: 300,
+                        // maxSize: 400,
                         spacing_open: 10,
                         spacing_closed: 10
 	                }
@@ -20,12 +20,20 @@ quizeditorApp.directive('layoutContainer', function() {
         }
     };
 })
-.directive('editorSidebar', function() {
+.directive('categorySidebar', function() {
     return {
         replace: false,
         restrict: 'A', 
         controller: 'SidebarCtrl',
-        templateUrl: 'views/sidebar.html'
+        templateUrl: 'views/categorySidebar.html'
+    };
+})
+.directive('questionSidebar', function() {
+    return {
+        replace: false,
+        restrict: 'A', 
+        controller: 'SidebarCtrl',
+        templateUrl: 'views/questionSidebar.html'
     };
 })
 .directive('editorMain', function() {
