@@ -24,6 +24,8 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     $scope.createQuestion = function() {
       Questions.create($scope.question).then(function(question) {
         $scope.questions.push(question);
+        // update the current question
+        $scope.currentQuestion = $scope.question;
         // reset to default empty name and default type
         $scope.question = {q_name: '', q_type: 'true_false'};
       });
@@ -45,6 +47,10 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       // Questions.edit(question);
       $scope.currentQuestion = question;
       console.log('editing a question');
+    };
+
+    $scope.clickError = function() {
+      // $dialogs.error('This is my error message');
     };
 
   }])
