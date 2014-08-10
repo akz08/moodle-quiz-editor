@@ -59,9 +59,15 @@ quizeditorApp.factory('Questions', ['Restangular',
 					return result;
 				});
 			},
+			// for when the question is selected for the edit window
 			edit: function(question) {
-				this.setCurrent(question);
+
+				this.setCurrent(question); 
 				notifyEditObservers();
+			},
+			// this actually edits the question (some renaming is in order)
+			put: function() {
+
 			},
 			delete: function(questionId) {
 				// get question by the given id, and delete if found

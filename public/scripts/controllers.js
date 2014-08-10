@@ -43,12 +43,32 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     };
 
     $scope.editQuestion = function(question) {
-      // CALLBACK
-      // Questions.edit(question);
+      // callback to inform observers a question is being edited
+      Questions.edit(question);
       $scope.currentQuestion = question;
       console.log('editing a question');
     };
       
+    $scope.modalCreate = function() {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'views/modalCreateQuestion.html',
+        controller: 'ModalCreateQuestionCtrl',
+        resolve: { 
+          question: function() {
+            return $scope.question;
+          }
+        }
+      });
+
+      modalInstance.result.then(function() {
+        $scope.createQuestion();
+      }, function() {
+        console.log('Create Modal Closed');
+      });
+
+    }; 
+
     $scope.modalDelete = function(question) {
       
         // NOTE: passing 'question' back and forth seems unnecessary
@@ -67,9 +87,29 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
           $scope.deleteQuestion(question);
         },function(){
           //on cancel button press
-          console.log('Modal Closed');
+          console.log('Delete Modal Closed');
         });
-    };     
+    };   
+
+    $scope.modalEditName = function(question) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'views/modalEditName.html',
+        controller: 'ModalEditNameCtrl',
+        resolve: {
+          question: function() {
+              return question;
+            }
+        }
+      });
+
+      modalInstance.result.then(function(question) {
+
+      }, function() {
+        console.log('Edit Modal Closed');
+      });
+
+    }; 
 }])
 
 .controller('EditorCtrl', ['$scope', '$window', 'Questions',
@@ -79,11 +119,11 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
                       'q_type': 'default type'};
 
     // USED FOR CALLBACK
-    // var updateQuestion = function() {
-    //   $scope.question = Questions.getCurrent();
-    // };
+    var updateQuestion = function() {
+      $scope.question = Questions.getCurrent();
+    };
 
-    // Questions.registerEditObserverCallback(updateQuestion);
+    Questions.registerEditObserverCallback(updateQuestion);
 
     $scope.getMoodleXml = function() {
       // slight hack to get things running. the FULL url should be returned by the service
@@ -93,6 +133,21 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       // open a new window to download the xml file
       $window.open(baseUrl + '/export?type=moodle_xml');
     };
+}])
+
+.controller('ModalCreateQuestionCtrl', ['$scope', '$modalInstance', 'question',
+  function($scope, $modalInstance, question) {
+
+    $scope.question = question;
+
+    $scope.confirm = function() {
+      $modalInstance.close();
+    };
+
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
+    };
+
 }])
 
 .controller('ModalDeleteCtrl', ['$scope', '$modalInstance', 'question',
@@ -108,4 +163,18 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       $modalInstance.dismiss('no');
     };
 
+}])
+
+.controller('ModalEditNameCtrl', ['$scope', '$modalInstance', 'question',
+  function($scope, $modalInstance, question) {
+
+    $scope.currentQuestion = question;
+
+    $scope.confirm = function() {
+
+    };
+
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
+    };
 }]);
