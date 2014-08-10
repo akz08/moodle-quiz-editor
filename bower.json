@@ -15,7 +15,9 @@
     "restangular": "1.4.0",
     "lodash": ">=1.3.0 <2.5.0",
     "angular-ui-tinymce": "latest",
-    "fontawesome": "~4.1.0"
+    "angular-ui-layout": "latest",
+    "fontawesome": "~4.1.0",
+    "jquery.layout": "latest"
   },
   "devDependencies": {
     "angular-mocks": "1.2.16",

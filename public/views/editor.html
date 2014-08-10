@@ -1,6 +1,6 @@
-<div class="question-editor container" ng-controller="EditorCtrl">
-    <h1>Title: {{ question.q_name }}</h1>
-    <h2>Type: {{ question.q_type }}</h2>
+<div class="question-editor">
+    <h1>Title: {{ currentQuestion.q_name }}</h1>
+    <h2>Type: {{ currentQuestion.q_type }}</h2>
 
     <p>
         <button type="button" class="btn btn-primary btn-lg" ng-click="getMoodleXml()" download="test.xml">Download Moodle XML</button>
@@ -11,6 +11,5 @@
     </form>
 
    <p> {{ tinymceModel }} </p> -->
-    
+
 </div>
-<!-- ./question-editor -->

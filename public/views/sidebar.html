@@ -1,4 +1,4 @@
-<div class="question-sidebar" ng-controller="SidebarCtrl">
+<div class="question-sidebar" >
 
     <div class="sidebar-static">
         <form id="create-question" class="form-horizontal" ng-submit="createQuestion()">
@@ -34,25 +34,7 @@
     <!-- /.sidebar-static -->
 
     <div class="sidebar-scrollable">
-<!--
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Type</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="question in questions">
-                    <td>{{question.id}}</td>
-                    <td>{{question.title}}</td>
-                    <td>{{question.type}}</td>
-                    <td><a ng-click="deleteQuestion(question)">x</a></td>
-                </tr>
-            </tbody>
-        </table> 
--->
+
         <div class="btn-group btn-group-justified" ng-repeat="question in questions">
           <div class="btn-group">
             <button type="button" class="btn btn-default btn-sm">[{{ question.id }}] {{ question.q_name }}</button>
@@ -68,4 +50,3 @@
     <!-- /.sidebar-scrollable -->
 
 </div>
-<!-- /.question-sidebar -->

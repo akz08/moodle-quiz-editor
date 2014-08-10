@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/jquery.layout/dist/layout-default-latest.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- manually link Yeti Bootswatch theme -->
@@ -16,6 +17,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+
   </head>
   <body ng-app="quizEditorApp">
     <!--[if lt IE 7]>
@@ -48,6 +50,10 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+    <!-- manually link Bootstrap js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>
@@ -62,17 +68,18 @@
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/tinymce/tinymce.min.js"></script>
     <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    <script src="bower_components/raf/index.js"></script>
+    <script src="bower_components/angular-ui-layout/ui-layout.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/jquery.layout/dist/jquery.layout-latest.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
       
-    <!-- manually link Bootstrap js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers.js"></script>
         <script src="scripts/services.js"></script>
+        <script src="scripts/directives.js"></script>
         <!-- endbuild -->
 </body>
 </html>

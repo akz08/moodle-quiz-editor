@@ -18,7 +18,7 @@ body {
     display: flex;
     overflow: hidden;*/
     /*width: 100%;*/
-    padding-bottom: 0px;
+    /*padding-bottom: 0px;*/
 }
 
 
@@ -27,7 +27,6 @@ body {
     /* !important to override the inline style inserted by jquery*/
     display: -webkit-flex !important; 
     display: flex !important;
-    /*padding: 0;*/
     background-color: black;
     overflow: hidden;
 }
@@ -46,7 +45,6 @@ body {
     -webkit-flex: 0 1 auto;
     flex: 0 1 auto;
     padding: 1px;
-    /*width: 300px;*/
     background-color: #c7c7c7;
 }
 
@@ -60,7 +58,6 @@ body {
     flex: 1 1 0;
     padding: 5px;
     overflow-y: scroll;
-    /*width: 300px;*/
     background: #e4e4e4;
 }
 
@@ -76,20 +73,17 @@ body {
 .question-editor {
 /*    -webkit-flex-direction: column;
     flex-direction: column;
-    padding: 10px;
     overflow-y: scroll;*/
+    padding: 10px;
 }
 
+/* JQuery Layout */
 .ui-layout-pane {
     padding: 0;
-/*    overflow: hidden;
-    display: -webkit-flex;
-    display: flex;*/
-    background-color: grey;
-    /*display: block;*/
+    background-color: white;
 }
 
 /* STYLE THIS TO CHANGE THE HANDLE */
 .ui-layout-toggler {
-        background-color: white;
+        background-color: black;
 }
