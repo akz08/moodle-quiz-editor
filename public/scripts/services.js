@@ -59,14 +59,13 @@ quizeditorApp.factory('Questions', ['Restangular',
 					return result;
 				});
 			},
-			// for when the question is selected for the edit window
-			edit: function(question) {
+			// for when the question is selected for the editor window
+			editor: function(question) {
 
 				this.setCurrent(question); 
 				notifyEditObservers();
 			},
-			// this actually edits the question (some renaming is in order!)
-			put: function(oldQuestion, newQuestion) {
+			edit: function(oldQuestion, newQuestion) {
 				return oldQuestion.customPUT(newQuestion).then(function(result) {
 					return result;
 				});

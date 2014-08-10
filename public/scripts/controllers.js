@@ -52,8 +52,8 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     };
 
     $scope.editQuestion = function(question) {
-      // callback to inform observers a question is being edited
-      Questions.edit(question);
+      // callback to inform observers a question is to be edited in the editor
+      Questions.editor(question);
       $scope.currentQuestion = question;
       console.log('editing a question');
     };
