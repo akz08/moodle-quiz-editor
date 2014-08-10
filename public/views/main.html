@@ -1,3 +1,97 @@
-<div class="sidebar-container" ng-include="'views/sidebar.html'"></div>
+<div class="main-content" layout-container>
+<!-- 
+	    <div class="ui-layout-west ">WEST</div>
+        <div class="ui-layout-center ">MIDDLE</div> -->
+<div class="sidebar-container ui-layout-west" >
+<div class="question-sidebar" ng-controller="SidebarCtrl">
 
-<div class="editor-container" ng-include="'views/editor.html'"></div>
+    <div class="sidebar-static">
+        <form id="create-question" class="form-horizontal" ng-submit="createQuestion()">
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <input type="text" placeholder="Question title" class="form-control" ng-model="question.q_name">
+                </div>
+            </div>
+            <!-- /.form-group -->
+            <div class="form-group">
+                <div class="col-sm-8">
+                    <select class="form-control" ng-model="question.q_type">
+                        <option value="calculated">Calculated</option>
+                        <option value="description">Description</option>
+                        <option value="essay">Essay</option>
+                        <option value="matching">Matching</option>
+                        <option value="embedded_answers">Embedded Answers</option>
+                        <option value="multiple_choice">Multiple Choice</option>
+                        <option value="short_answer">Short Answer</option>
+                        <option value="numerical">Numerical</option>
+                        <option value="true_false">True/False</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                <div class="col-sm-4">
+                    <input type="submit" class="btn btn-primary btn-sm btn-block" value="Submit">
+                    </div>
+                </div>
+            </div>
+            <!-- /.form-group -->
+        </form>
+    </div>
+    <!-- /.sidebar-static -->
+
+    <div class="sidebar-scrollable">
+<!--
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="question in questions">
+                    <td>{{question.id}}</td>
+                    <td>{{question.title}}</td>
+                    <td>{{question.type}}</td>
+                    <td><a ng-click="deleteQuestion(question)">x</a></td>
+                </tr>
+            </tbody>
+        </table> 
+-->
+        <div class="btn-group btn-group-justified" ng-repeat="question in questions">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm">[{{ question.id }}] {{ question.q_name }}</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary btn-sm" ng-click="editQuestion(question)">Edit</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-danger btn-sm" ng-click="deleteQuestion(question)">Delete</button>
+          </div>
+        </div>
+    </div>
+    <!-- /.sidebar-scrollable -->
+
+</div>
+<!-- /.question-sidebar -->
+</div>
+
+<div class="editor-container ui-layout-center" >
+<div class="question-editor container" ng-controller="EditorCtrl">
+    <h1>Title: {{ question.q_name }}</h1>
+    <h2>Type: {{ question.q_type }}</h2>
+
+    <p>
+        <button type="button" class="btn btn-primary btn-lg" ng-click="getMoodleXml()" download="test.xml">Download Moodle XML</button>
+    </p>
+
+<!--     <form method="post">
+    	<textarea ui-tinymce ng-model="tinymceModel"></textarea>
+    </form>
+
+   <p> {{ tinymceModel }} </p> -->
+
+</div>
+<!-- ./question-editor -->
+</div>
+</div>

@@ -14,18 +14,22 @@ body {
 
 /* MAIN CONTENT AREA (i.e. non-navbar) */
 .main-content {
-    display: -webkit-flex;
+/*    display: -webkit-flex;
     display: flex;
-    overflow: hidden;
-    width: 100%;
+    overflow: hidden;*/
+    /*width: 100%;*/
     padding-bottom: 0px;
 }
 
 
 /* SIDEBAR */
 .sidebar-container {
-    display: -webkit-flex;
-    display: flex;
+    /* !important to override the inline style inserted by jquery*/
+    display: -webkit-flex !important; 
+    display: flex !important;
+    /*padding: 0;*/
+    background-color: black;
+    overflow: hidden;
 }
 
 .question-sidebar {
@@ -42,7 +46,7 @@ body {
     -webkit-flex: 0 1 auto;
     flex: 0 1 auto;
     padding: 1px;
-    width: 300px;
+    /*width: 300px;*/
     background-color: #c7c7c7;
 }
 
@@ -56,22 +60,36 @@ body {
     flex: 1 1 0;
     padding: 5px;
     overflow-y: scroll;
-    width: 300px;
+    /*width: 300px;*/
     background: #e4e4e4;
 }
 
 /* MAIN EDITOR */
 .editor-container{
-    display: -webkit-flex;
+/*    display: -webkit-flex;
     display: flex;
     -webkit-flex: 1 1 0;
-    flex: 1 1 0;
+    flex: 1 1 0;*/
 }
 
 /* Genertic question editor */
 .question-editor {
-    -webkit-flex-direction: column;
+/*    -webkit-flex-direction: column;
     flex-direction: column;
     padding: 10px;
-    overflow-y: scroll;
+    overflow-y: scroll;*/
+}
+
+.ui-layout-pane {
+    padding: 0;
+/*    overflow: hidden;
+    display: -webkit-flex;
+    display: flex;*/
+    background-color: grey;
+    /*display: block;*/
+}
+
+/* STYLE THIS TO CHANGE THE HANDLE */
+.ui-layout-toggler {
+        background-color: white;
 }
