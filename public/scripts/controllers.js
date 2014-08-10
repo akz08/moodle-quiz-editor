@@ -32,7 +32,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     };
 
     $scope.putQuestion = function(oldQuestion, newQuestion) {
-      Questions.put(oldQuestion, newQuestion).then(function(question) {
+      Questions.edit(oldQuestion, newQuestion).then(function(question) {
         // find the current question 
         var index = $scope.questions.indexOf(oldQuestion);
         // replace its value with the updated value
