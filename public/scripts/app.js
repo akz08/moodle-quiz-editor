@@ -19,7 +19,8 @@ var quizeditorApp = angular.module('quizEditorApp', [
     'ngTouch',
     'restangular',
     'ui.tinymce',
-    'ui.layout'
+    'ui.layout',
+    'ui.bootstrap'
   ]);
 
 quizeditorApp.config(['$routeProvider', 
