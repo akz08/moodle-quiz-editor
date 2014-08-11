@@ -1,0 +1,14 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title">Confirm deletion</h4>
+		</div>
+		<div class="modal-body">
+			<p>Are you sure you want to delete the category "{{ category.c_name }}"? (This does not delete the containing questions)</p>
+		</div>
+		<div class="modal-footer">
+		    <button class="btn btn-sm btn-danger" ng-click="yes()">Yes</button>
+		    <button class="btn btn-sm btn-default" ng-click="no()">No</button>
+		</div>
+	</div>
+</div>

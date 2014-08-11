@@ -23,9 +23,97 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       $scope.categories = categories;
     });
 
+    $scope.createCategory = function() {
+      Categories.create($scope.category).then(function(category) {
+        $scope.categories.push(category);
+        // update the current category (could also use the callback)
+        $scope.currentCategory = $scope.category;
+        // reset to default empty category values
+        $scope.category = {c_name: '', c_description: ''};
+      });
+    };
+
+    $scope.putCategory = function(oldCategory, newCategory) {
+      Categories.edit(oldCategory, newCategory).then(function(category) {
+        // replace the old category in the list
+        var index = $scope.categories.indexOf(oldCategory);
+        $scope.categories[index] = category;
+        // update the current category?
+      });
+    };
+
+    $scope.deleteCategory = function(category) {
+      Categories.delete(category.id).then(function() {
+        var i = $scope.categories.indexOf(category);
+        $scope.categories.splice(i, 1);
+      });
+    };
+
+    $scope.modalCreateCategory = function() {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'views/modalCreateCategory.html',
+        controller: 'ModalCreateCategoryCtrl',
+        resolve: { 
+          category: function() {
+            return $scope.category;
+          }
+        }
+      });
+
+      modalInstance.result.then(function() {
+        $scope.createCategory();
+      }, function() {
+        console.log('Create Modal Closed');
+      });
+
+    };
+
+    $scope.modalEditCategory = function(oldCategory) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'views/modalEditCategory.html',
+        controller: 'ModalEditCategoryCtrl',
+        resolve: {
+          category: function() {
+              return oldCategory;
+            }
+        }
+      });
+
+      modalInstance.result.then(function(newCategory) {
+        $scope.putCategory(oldCategory, newCategory);
+      }, function() {
+        console.log('Edit Modal Closed');
+      });
+
+    };
+
+    $scope.modalDeleteCategory = function(category) {
+      
+        var modalInstance = $modal.open({
+          templateUrl: 'views/modalDeleteCategory.html',
+          controller: 'ModalDeleteCategoryCtrl',
+          resolve: { 
+            category: function() {
+              return category;
+            }
+          }
+        });
+        
+        modalInstance.result.then(function(category){
+          //on ok button press 
+          $scope.deleteCategory(category);
+        },function(){
+          //on cancel button press
+          console.log('Delete Modal Closed');
+        });
+    }; 
+
     /** QUESTIONS **/
     $scope.question = {q_name: '', q_type: 'true_false'};
 
+    // just grab all the questions (for now)
     Questions.getAll().then(function(questions) {
       $scope.questions = questions;
     });
@@ -154,6 +242,52 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       // open a new window to download the xml file
       $window.open(baseUrl + '/export?type=moodle_xml');
     };
+}])
+
+.controller('ModalCreateCategoryCtrl', ['$scope', '$modalInstance', 'category',
+ function($scope, $modalInstance, category) {
+
+  $scope.category = category;
+
+  $scope.confirm = function() {
+    $modalInstance.close();
+  };
+
+  $scope.cancel = function() {
+    $modalInstance.dismiss('cancel');
+  };
+  
+}])
+
+.controller('ModalEditCategoryCtrl', ['$scope', '$modalInstance', 'category',
+ function($scope, $modalInstance, category) {
+  
+    $scope.currentCategory = category;
+    $scope.newCategory = angular.copy(category);
+
+    $scope.confirm = function() {
+      $modalInstance.close($scope.newCategory);
+    };
+
+    $scope.cancel = function() {
+      $modalInstance.dismiss('cancel');
+    };
+
+}])
+
+.controller('ModalDeleteCategoryCtrl', ['$scope', '$modalInstance', 'category',
+ function($scope, $modalInstance, category){
+  
+    $scope.category = category;
+
+    $scope.yes = function() {
+      $modalInstance.close($scope.category);
+    };
+
+    $scope.no = function() {
+      $modalInstance.dismiss('no');
+    };
+
 }])
 
 .controller('ModalCreateQuestionCtrl', ['$scope', '$modalInstance', 'question',

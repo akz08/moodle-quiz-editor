@@ -1,0 +1,24 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+		  <h4 class="modal-title">Edit category: {{ currentCategory.c_name }}</h4>
+		</div>
+		<div class="modal-body">
+			<p>Enter the new category details below:</p>
+			<form>
+				<div class="form-group">
+                	<label>Category title</label>
+                    <input type="text" placeholder="Category title" class="form-control" ng-model="newCategory.c_name">
+	            </div>
+	            <div class="form-group">
+                	<label>Category description</label>
+                    <input type="text" placeholder="Category description" class="form-control" ng-model="newCategory.c_description">
+	            </div>
+			</form>
+		</div>
+		<div class="modal-footer">
+		    <button class="btn btn-sm btn-primary" ng-click="confirm()">Confirm</button>
+		    <button class="btn btn-sm btn-default" ng-click="cancel()">Cancel</button>
+		</div>
+	</div>
+</div>
