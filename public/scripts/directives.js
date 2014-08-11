@@ -10,7 +10,7 @@ quizeditorApp.directive('layoutContainer', function() {
                         resizable : false,
                         initClosed : false,
                         // livePaneResizing: true,
-                        size: 300,
+                        size: 600,
                         // minSize: 300,
                         // maxSize: 400,
                         spacing_open: 10,

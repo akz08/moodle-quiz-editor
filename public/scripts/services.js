@@ -79,4 +79,75 @@ quizeditorApp.factory('Questions', ['Restangular',
 
 		};
 	}
+])
+.factory('Categories', ['Restangular', 
+	function(Restangular){
+		var restAngular =
+			Restangular.withConfig(function(Configurer) {
+				Configurer.setBaseUrl('/api');
+
+				// setup to use .originalElement to access 'unrestangularized' element
+				Configurer.setResponseExtractor(function(response) {
+				  var newResponse = response;
+				  if (angular.isArray(response)) {
+				    angular.forEach(newResponse, function(value, key) {
+				      newResponse[key].originalElement = angular.copy(value);
+				    });
+				  } else {
+				    newResponse.originalElement = angular.copy(response);
+				  }
+
+				  return newResponse;
+				});
+			});
+
+		var _Categories = restAngular.all('categories');
+
+		var currentCategory = {};
+
+		// to register observers when a category is to be edited
+		var editObserverCallbacks = [];
+
+		// notify observers of the current category to edit
+		var notifyEditObservers = function() {
+			angular.forEach(editObserverCallbacks, function(callback) {
+				callback();
+			});
+		};
+
+		return {
+			registerCategoryObserverCallback : function(callback) {
+				editObserverCallbacks.push(callback);
+			},
+			setCurrent: function(category) {
+				currentCategory = category;
+			},
+			getCurrent: function() {
+				return currentCategory;
+			},
+			selectCategory: function(category) {
+				this.setCurrent(category);
+				notifyEditObservers();
+			},
+			getAll: function() {
+				return _Categories.getList();
+			},
+			create: function(newCategory) {
+				return _Categories.post(newCategory).then(function(result) {
+					return result;
+				});
+			},
+			edit: function(oldCategory, newCategory) {
+				return oldCategory.customPUT(newCategory).then(function(result) {
+					return result;
+				});
+			},
+			delete: function(categoryId) {
+				// get category by the given id, and delete if found
+				return _Categories.get(categoryId).then(function(category) {
+					category.remove();
+				});
+			}
+		};
+	}
 ]);

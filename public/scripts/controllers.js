@@ -12,9 +12,18 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
 }])
 
-.controller('SidebarCtrl', ['$scope', '$modal', 'Questions',
-  function($scope, $modal, Questions) {
+.controller('SidebarCtrl', ['$scope', '$modal', 'Categories', 'Questions',
+  function($scope, $modal, Categories, Questions) {
     /*jshint camelcase: false */
+
+    /** CATEGORIES **/
+    $scope.category = {c_name: '', c_description: ''};
+
+    Categories.getAll().then(function(categories) {
+      $scope.categories = categories;
+    });
+
+    /** QUESTIONS **/
     $scope.question = {q_name: '', q_type: 'true_false'};
 
     Questions.getAll().then(function(questions) {
@@ -37,6 +46,8 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         var index = $scope.questions.indexOf(oldQuestion);
         // replace its value with the updated value
         $scope.questions[index] = question;
+        // update the editor question
+        Questions.editor(newQuestion);
       });
     };
 
@@ -54,11 +65,11 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     $scope.editQuestion = function(question) {
       // callback to inform observers a question is to be edited in the editor
       Questions.editor(question);
-      $scope.currentQuestion = question;
+      // $scope.currentQuestion = question;
       console.log('editing a question');
     };
       
-    $scope.modalCreate = function() {
+    $scope.modalCreateQuestion = function() {
 
       var modalInstance = $modal.open({
         templateUrl: 'views/modalCreateQuestion.html',
@@ -78,12 +89,12 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
     }; 
 
-    $scope.modalDelete = function(question) {
+    $scope.modalDeleteQuestion = function(question) {
       
         // NOTE: passing 'question' back and forth seems unnecessary
         var modalInstance = $modal.open({
-          templateUrl: 'views/modalDelete.html',
-          controller: 'ModalDeleteCtrl',
+          templateUrl: 'views/modalDeleteQuestion.html',
+          controller: 'ModalDeleteQuestionCtrl',
           resolve: { 
             question: function() {
               return question;
@@ -100,11 +111,11 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         });
     };   
 
-    $scope.modalEditName = function(oldQuestion) {
+    $scope.modalEditQuestionName = function(oldQuestion) {
 
       var modalInstance = $modal.open({
-        templateUrl: 'views/modalEditName.html',
-        controller: 'ModalEditNameCtrl',
+        templateUrl: 'views/modalEditQuestionName.html',
+        controller: 'ModalEditQuestionNameCtrl',
         resolve: {
           question: function() {
               return oldQuestion;
@@ -119,6 +130,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       });
 
     }; 
+
 }])
 
 .controller('EditorCtrl', ['$scope', '$window', 'Questions',
@@ -129,7 +141,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
     // USED FOR CALLBACK
     var updateQuestion = function() {
-      $scope.question = Questions.getCurrent();
+      $scope.currentQuestion = Questions.getCurrent();
     };
 
     Questions.registerEditObserverCallback(updateQuestion);
@@ -159,7 +171,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
 }])
 
-.controller('ModalDeleteCtrl', ['$scope', '$modalInstance', 'question',
+.controller('ModalDeleteQuestionCtrl', ['$scope', '$modalInstance', 'question',
   function($scope, $modalInstance, question) {
 
     $scope.question = question;
@@ -174,7 +186,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
 }])
 
-.controller('ModalEditNameCtrl', ['$scope', '$modalInstance', 'question',
+.controller('ModalEditQuestionNameCtrl', ['$scope', '$modalInstance', 'question',
   function($scope, $modalInstance, question) {
 
     $scope.currentQuestion = question;
