@@ -110,13 +110,24 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         });
     }; 
 
+    Categories.getQuestions(2).then(function(questions) {
+      console.log(questions);
+      $scope.questions = questions;
+    });
+
+    $scope.loadCategoryQuestions = function() {
+
+    };
+
     /** QUESTIONS **/
     $scope.question = {q_name: '', q_type: 'true_false'};
 
     // just grab all the questions (for now)
-    Questions.getAll().then(function(questions) {
-      $scope.questions = questions;
-    });
+    $scope.loadAllQuestions = function() {
+        Questions.getAll().then(function(questions) {
+          $scope.questions = questions;
+        });
+    };
 
     $scope.createQuestion = function() {
       Questions.create($scope.question).then(function(question) {

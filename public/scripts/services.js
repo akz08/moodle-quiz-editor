@@ -129,6 +129,21 @@ quizeditorApp.factory('Questions', ['Restangular',
 				this.setCurrent(category);
 				notifyEditObservers();
 			},
+			getQuestions: function(categoryId) {
+				// restAngular.all('categories').get(categoryId).then(function(categories) {
+				// 	console.log(categories);
+				// 	console.log(categories.getList('questions'));
+				// });
+
+				return _Categories.get(categoryId).then(function(categories) {
+					console.log(categories.getList('questions'));
+
+					return categories.getList('questions');
+				});
+
+				// var category = _Categories.getList();
+				// return category;
+			},
 			getAll: function() {
 				return _Categories.getList();
 			},
