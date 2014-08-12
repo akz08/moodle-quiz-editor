@@ -2,6 +2,7 @@ module QuizEditor
   module Routes
     class Categories < Routes::Base
 
+      ## Categories
       # GETs all available categories
       get '/categories' do
         format_response(Category.all, request.accept)
@@ -10,12 +11,6 @@ module QuizEditor
       # GETs a specific category (is this useful?)
       get '/categories/:c_id' do
         format_response(category_by_id(params[:c_id]), request.accept)
-      end
-
-      # GETs all questions of a category
-      get '/categories/:c_id/questions' do
-        format_response(category_by_id(params[:c_id]).
-          questions.all, request.accept)
       end
 
       # PUTs new values into a category
@@ -45,21 +40,28 @@ module QuizEditor
         end
       end
 
+      # DELETEs a category
+      delete '/categories/:c_id' do 
+        halt 500 unless category_by_id(params[:c_id]).destroy
+      end
+
+      ## Category Questions
+      # GETs all questions of a category
+      get '/categories/:c_id/questions' do
+        format_response(category_by_id(params[:c_id]).
+          questions.all, request.accept)
+      end
+
       # POSTs new (existing) question references to a category
       #   The route expects a valid Question JSON, or at least its id
       post '/categories/:c_id/questions' do 
         category = category_by_id(params[:c_id])
         body = MultiJson.load request.body.read
         # search by id from all available questions and add it to the category
-        category << question_by_id(body['id'])
+        category.questions << question_by_id(body['id'])
         # on success (no exception thrown), return all questions in the category
         status 201
         format_response(category.questions.all, request.accept)
-      end
-
-      # DELETEs a category
-      delete '/categories/:c_id' do 
-        halt 500 unless category_by_id(params[:c_id]).destroy
       end
 
       # DELETEs a reference to a question in a category
