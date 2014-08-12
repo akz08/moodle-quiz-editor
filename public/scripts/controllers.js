@@ -110,13 +110,16 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         });
     }; 
 
-    Categories.getQuestions(2).then(function(questions) {
-      console.log(questions);
-      $scope.questions = questions;
-    });
+    $scope.selectCategory = function(category) {
+      $scope.currentCategory = category;
+      $scope.loadCategoryQuestions(category.id);
+    };
 
-    $scope.loadCategoryQuestions = function() {
-
+    $scope.loadCategoryQuestions = function(categoryId) {
+      Categories.getQuestions(categoryId).then(function(questions) {
+        console.log(questions);
+        $scope.questions = questions;
+      });
     };
 
     /** QUESTIONS **/
@@ -136,6 +139,10 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         $scope.currentQuestion = $scope.question;
         // reset to default empty name and default type
         $scope.question = {q_name: '', q_type: 'true_false'};
+
+        Categories.registerQuestion($scope.currentCategory.id, question).then(function() {
+
+        });
       });
     };
 

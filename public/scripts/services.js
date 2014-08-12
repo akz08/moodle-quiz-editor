@@ -61,8 +61,7 @@ quizeditorApp.factory('Questions', ['Restangular',
 			},
 			// for when the question is selected for the editor window
 			editor: function(question) {
-
-				this.setCurrent(question); 
+				currentQuestion = question;
 				notifyEditObservers();
 			},
 			edit: function(oldQuestion, newQuestion) {
@@ -135,14 +134,21 @@ quizeditorApp.factory('Questions', ['Restangular',
 				// 	console.log(categories.getList('questions'));
 				// });
 
-				return _Categories.get(categoryId).then(function(categories) {
-					console.log(categories.getList('questions'));
+				return _Categories.get(categoryId).then(function(category) {
+					console.log(category.getList('questions'));
 
-					return categories.getList('questions');
+					return category.getList('questions');
 				});
 
 				// var category = _Categories.getList();
 				// return category;
+			},
+			registerQuestion: function(categoryId, question) {
+				// post a question to the category/:c_id/questions route
+				// where :c_id is categoryId
+				return _Categories.get(categoryId).then(function(category) {
+					return category.post('questions', question);
+				});
 			},
 			getAll: function() {
 				return _Categories.getList();
