@@ -270,6 +270,14 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       // open a new window to download the xml file
       $window.open(baseUrl + '/export?type=moodle_xml');
     };
+
+    // TinyMCE options
+    $scope.tinymceOptions = {
+      // handle_event_callback: function (e) {
+
+      // },
+      menubar: 'edit format'
+    };
 }])
 
 .controller('ModalCreateCategoryCtrl', ['$scope', '$modalInstance', 'category',
