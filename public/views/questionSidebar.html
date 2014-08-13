@@ -1,6 +1,6 @@
 <div class="question-sidebar" >
 
-    <div class="sidebar-static">
+    <div class="sidebar-static-top">
     </div>
 
 
@@ -8,10 +8,10 @@
 
         <div class="btn-group btn-block" ng-repeat="question in questions">
           <!-- <div class="btn-group"> -->
-            <button type="button" class="btn btn-default btn-sm col-sm-10" ng-click="editQuestion(question)">
+            <button type="button" class="btn btn-sm col-sm-10" ng-class="{'btn-success': question==currentQuestion, 'btn-default': true}" ng-click="editQuestion(question)">
                 [{{ question.id }}, {{ question.q_type }} ] {{ question.q_name }}
             </button>
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle col-sm-2" data-toggle="dropdown">
+            <button type="button" class="btn btn-sm dropdown-toggle col-sm-2" ng-class="{'btn-success': question==currentQuestion, 'btn-default': true}" data-toggle="dropdown">
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
@@ -31,13 +31,6 @@
     <!-- /.sidebar-scrollable -->
 
     <div class="sidebar-static-bottom">
-        <!-- temporary button to test functionality -->
-        <input type="submit" class="btn btn-success btn-sm btn-block" ng-click="loadCategoryQuestions(2)" value="Load category questions">
-
-        <input type="submit" class="btn btn-success btn-sm btn-block" ng-click="loadAllQuestions()" value="Load all questions">
-
-        <input type="submit" class="btn btn-primary btn-sm btn-block" ng-click="" value="+ Add new Question to Category">
-
         <input type="submit" class="btn btn-primary btn-sm btn-block" ng-click="modalCreateQuestion()" value="+ Add new Question">
     </div>
     <!-- /.sidebar-static-bottom -->

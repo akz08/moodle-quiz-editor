@@ -130,6 +130,9 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         Questions.getAll().then(function(questions) {
           $scope.questions = questions;
         });
+
+        // set the currentCategory to falsey value to remove css rule on selected category
+        $scope.currentCategory = false;
     };
 
     $scope.createQuestion = function() {
@@ -140,8 +143,8 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         // reset to default empty name and default type
         $scope.question = {q_name: '', q_type: 'true_false'};
 
-        Categories.registerQuestion($scope.currentCategory.id, question).then(function() {
-
+        Categories.registerQuestion($scope.currentCategory.id, question).then(function(categoryQuestions) {
+          console.log(categoryQuestions);
         });
       });
     };

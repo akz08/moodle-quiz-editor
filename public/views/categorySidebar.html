@@ -1,6 +1,7 @@
 <div class="category-sidebar" >
 
-    <div class="sidebar-static">
+    <div class="sidebar-static-top">
+        <input type="submit" class="btn btn-info btn-sm btn-block" ng-click="loadAllQuestions()" value="Load all questions">
     </div>
 
 
@@ -8,10 +9,10 @@
 
         <div class="btn-group btn-block" ng-repeat="category in categories">
           <!-- <div class="btn-group"> -->
-            <button type="button" class="btn btn-default btn-sm col-sm-10" ng-click="selectCategory(category)">
+            <button type="button" class="btn btn-sm col-sm-10" ng-class="{'btn-success': category==currentCategory, 'btn-default': true}" ng-click="selectCategory(category)">
                 [{{ category.id }}] {{ category.c_name }}, {{ category.c_description }}
             </button>
-            <button type="button" class="btn btn-default btn-sm dropdown-toggle col-sm-2" data-toggle="dropdown">
+            <button type="button" class="btn btn-sm dropdown-toggle col-sm-2" ng-class="{'btn-success': category==currentCategory, 'btn-default': true}" data-toggle="dropdown">
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">

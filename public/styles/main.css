@@ -50,7 +50,7 @@ body {
 }
 
 /* Set a fixed size nav at the top of the sidebar */
-.sidebar-static{
+.sidebar-static-top{
     -webkit-flex: 0 1 auto;
     flex: 0 1 auto;
     padding: 1px;
