@@ -125,6 +125,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     /** QUESTIONS **/
     $scope.question = {q_name: '', q_type: 'true_false'};
 
+
     // just grab all the questions (for now)
     $scope.loadAllQuestions = function() {
         Questions.getAll().then(function(questions) {
@@ -135,6 +136,9 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         $scope.currentCategory = false;
     };
 
+    // default load questions so that there is a list to add questions to
+    $scope.loadAllQuestions();
+
     $scope.createQuestion = function() {
       Questions.create($scope.question).then(function(question) {
         $scope.questions.push(question);
@@ -143,9 +147,12 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         // reset to default empty name and default type
         $scope.question = {q_name: '', q_type: 'true_false'};
 
-        Categories.registerQuestion($scope.currentCategory.id, question).then(function(categoryQuestions) {
-          console.log(categoryQuestions);
-        });
+        // check if currentCategory exists first
+        if ($scope.currentCategory) {
+          Categories.registerQuestion($scope.currentCategory.id, question).then(function(categoryQuestions) {
+            console.log(categoryQuestions);
+          });
+        }
       });
     };
 

@@ -82,17 +82,35 @@ body {
 
 /* MAIN EDITOR */
 .editor-container{
-/*    display: -webkit-flex;
-    display: flex;
-    -webkit-flex: 1 1 0;
+    display: -webkit-flex !important;
+    display: flex !important;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+/*    -webkit-flex: 1 1 0;
     flex: 1 1 0;*/
+    /*position: relative;*/
 }
 
-/* Genertic question editor */
+.editor-navbar {
+    -webkit-flex: 0 1 auto;
+    flex: 0 1 auto;
+
+    margin-bottom: 0px;
+    /*padding: 1px;*/
+    /*background-color: #c7c7c7;*/
+    /*width: 100%;*/
+
+/*    position: fixed;
+    width: 100%;*/
+}
+
+/* Generic question editor */
 .question-editor {
+    -webkit-flex: 1 1 0;
+    flex: 1 1 0;
 /*    -webkit-flex-direction: column;
-    flex-direction: column;
-    overflow-y: scroll;*/
+    flex-direction: column;*/
+    overflow-y: scroll;
     padding: 10px;
 }
 
