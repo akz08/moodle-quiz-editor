@@ -27,7 +27,7 @@
 
     <div class="answer-container" ng-repeat="answer in answers">
         <div class="answer-main">
-            <div class="answer-btn-edit">
+            <div class="answer-btn-edit" ng-click="editAnswer(answer)">
                 <i class="edit-icon fa fa-pencil fa-2x"></i>
             </div>
             <div class="answer-btn-correct">
@@ -40,7 +40,7 @@
                 	<input style="width: 100%; height: 3em; text-align: center;" class="editable" ng-model="answer.text">
                 </form>
             </div>
-            <div class="answer-btn-delete">
+            <div class="answer-btn-delete" ng-click="deleteAnswer(answer)">
                 <i class="delete-icon fa fa-times fa-2x"></i>
             </div>
         </div>

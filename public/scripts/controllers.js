@@ -298,6 +298,11 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       $scope.answers.push({ text: '', editing: false});
     };
 
+    $scope.deleteAnswer = function(answer) {
+        var i = $scope.answers.indexOf(answer);
+        $scope.answers.splice(i, 1);
+    };
+
 }])
 
 .controller('ModalCreateCategoryCtrl', ['$scope', '$modalInstance', 'category',
