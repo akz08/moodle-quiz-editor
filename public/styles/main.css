@@ -114,6 +114,11 @@ body {
     padding: 10px;
 }
 
+/* tinyMCE */
+.tinyText {
+    max-width: 40em !important;
+}
+
 /* JQuery Layout */
 
 .ui-layout-west {
@@ -133,4 +138,69 @@ body {
 /* fix for bootstrap modal */
 .modal { 
     display: block;
+}
+
+/* Custom answer buttons */
+.new-answer {
+    height: 3em;
+    min-width: 18em;
+    max-width: 40em;
+    background-color: #61cc61;
+    margin: 0.5em;
+    text-align: center;
+}
+.new-answer:hover {
+    background-color: #5db95d;
+}
+.new-answer:active {
+    background-color: #618861;
+}
+.answer-container {
+    height: 4em;
+    min-width: 18em;
+    max-width: 40em;
+    margin: 0.5em
+}
+.answer-main {
+    height: 3em; 
+    background-color: #dd1e1e;
+    display: flex;
+}
+.edit-icon, .correct-icon, .delete-icon, .new-icon {
+    line-height: 1.6em;
+}
+.answer-btn-edit, .answer-btn-correct, .answer-btn-delete {
+    min-width: 3em;   
+    width: 3em;
+    height: 3em;
+    text-align: center;
+}
+.answer-btn-edit {
+    background-color: #89d3e5;
+}
+.answer-btn-edit:hover {
+    background-color: #64a8b9;
+}
+.answer-btn-correct {
+    background-color: #60badd;
+}
+.answer-btn-correct:hover {
+    background-color: #54a6c6;
+}
+.answer-btn-body {
+    height: 3em;
+    flex: 1 1 auto;
+    background-color: #e3e3e3;  
+    text-align: center;
+    line-height: 3em;
+}
+.answer-btn-delete {
+    background-color: #89d3e5;
+}
+.answer-btn-delete:hover {
+    background-color: #64a8b9;
+}
+.answer-expand {
+    height: 1em;
+    background-color: #2d6c80;   
 }

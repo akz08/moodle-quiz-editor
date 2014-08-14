@@ -278,6 +278,26 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       // },
       menubar: 'edit format'
     };
+
+    // some test code to try prototype the answer creation blocks
+    $scope.answers = [{ text: 'answer 1', editing: false}, {text: 'answer 2', editing: false}];
+
+    $scope.editAnswer = function(answer) {
+      answer.editing = true;
+    };
+
+    $scope.doneEditing = function(elem) {
+      if (! angular.element(elem.srcElement).hasClass('editable')) {
+        angular.forEach($scope.answers, function(key, value) {
+          key.editing = false;
+        });
+      }
+    };
+
+    $scope.newAnswer = function() {
+      $scope.answers.push({ text: '', editing: false});
+    };
+
 }])
 
 .controller('ModalCreateCategoryCtrl', ['$scope', '$modalInstance', 'category',

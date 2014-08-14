@@ -8,7 +8,7 @@
   </ul>
 </nav>
 
-<div class="question-editor">
+<div class="question-editor" >
 
 
     <h1>Title: {{ currentQuestion.q_name }}</h1>
@@ -24,5 +24,31 @@
     </form>
 
    <p> {{ tinymceModel }} </p>
+
+    <div class="answer-container" ng-repeat="answer in answers">
+        <div class="answer-main">
+            <div class="answer-btn-edit">
+                <i class="edit-icon fa fa-pencil fa-2x"></i>
+            </div>
+            <div class="answer-btn-correct">
+                <i class="correct-icon fa fa-check fa-2x"></i>
+            </div>
+            <div class="answer-btn-body" ng-dblclick="editAnswer(answer)">
+                <!-- answer text goes here -->
+                <label style="width: 100%;" class="editable" ng-hide="answer.editing">{{ answer.text }}</label>
+                <form  ng-submit="doneEditing(answer)" ng-show="answer.editing">
+                	<input style="width: 100%; height: 3em; text-align: center;" class="editable" ng-model="answer.text">
+                </form>
+            </div>
+            <div class="answer-btn-delete">
+                <i class="delete-icon fa fa-times fa-2x"></i>
+            </div>
+        </div>
+        <div class="answer-expand"></div>
+    </div>
+    
+    <div class="new-answer" ng-click="newAnswer()">
+        <i class="new-icon fa fa-plus fa-2x"></i>
+    </div>
 
 </div>
