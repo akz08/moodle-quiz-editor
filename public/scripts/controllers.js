@@ -17,9 +17,12 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     /*jshint camelcase: false */
 
     /** CATEGORIES **/
+
+    // initialisation
     $scope.category = {c_name: '', c_description: ''};
 
     Categories.getAll().then(function(categories) {
+      console.log('initialise the categories and set it up');
       $scope.categories = categories;
 
       // set the first category (default created category) to be the current category
@@ -125,12 +128,14 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
     $scope.loadCategoryQuestions = function(categoryId) {
       Categories.getQuestions(categoryId).then(function(questions) {
-        // console.log(questions);
+        console.log('loadCategoryQuestions');
         $scope.questions = questions;
       });
     };
 
     /** QUESTIONS **/
+
+    // initialisation
     $scope.question = {q_name: '', q_type: 'true_false'};
 
     $scope.isDefaultQuestion = function() {
@@ -200,7 +205,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       // callback to inform observers a question is to be edited in the editor
       Questions.editor(question);
       // $scope.currentQuestion = question;
-      console.log('editing a question');
+      // console.log('editing a question');
     };
       
     $scope.modalCreateQuestion = function() {
@@ -218,7 +223,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       modalInstance.result.then(function() {
         $scope.createQuestion();
       }, function() {
-        console.log('Create Modal Closed');
+        // console.log('Create Modal Closed');
       });
 
     }; 
@@ -241,7 +246,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
           $scope.deleteQuestion(question);
         },function(){
           //on cancel button press
-          console.log('Delete Modal Closed');
+          // console.log('Delete Modal Closed');
         });
     };   
 
@@ -260,7 +265,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       modalInstance.result.then(function(newQuestion) {
         $scope.putQuestion(oldQuestion, newQuestion);
       }, function() {
-        console.log('Edit Modal Closed');
+        // console.log('Edit Modal Closed');
       });
 
     }; 
@@ -306,7 +311,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         Questions.getAllAnswers().then(function(answers) {
         // console.log(questions);
         $scope.answers = answers;
-        console.log(answers);
+        // console.log(answers);
       });
     };
 
@@ -317,34 +322,6 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     $scope.editAnswer = function(answer) {
       answer.editing = true;
     };
-
-    // $scope.putQuestion = function(oldQuestion, newQuestion) {
-    //   Questions.edit(oldQuestion, newQuestion).then(function(question) {
-    //     // find the current question 
-    //     var index = $scope.questions.indexOf(oldQuestion);
-    //     // replace its value with the updated value
-    //     $scope.questions[index] = question;
-    //     // update the editor question
-    //     Questions.editor(newQuestion);
-    //   });
-    // };
-
-    // $scope.createQuestion = function() {
-    //   Questions.create($scope.question).then(function(question) {
-    //     $scope.questions.push(question);
-    //     // update the current question
-    //     $scope.currentQuestion = question;
-    //     // reset to default empty name and default type
-    //     $scope.question = {q_name: '', q_type: 'true_false'};
-
-    //     // check if currentCategory exists first
-    //     if ($scope.currentCategory) {
-    //       Categories.registerQuestion($scope.currentCategory.id, question).then(function(categoryQuestions) {
-    //         console.log(categoryQuestions);
-    //       });
-    //     }
-    //   });
-    // };
 
     $scope.putAnswer = function(answer) {
       Questions.editAnswer(answer).then(function(answer) {

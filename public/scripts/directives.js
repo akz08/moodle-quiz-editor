@@ -32,7 +32,7 @@ quizeditorApp.directive('layoutContainer', function() {
     return {
         replace: false,
         restrict: 'A', 
-        controller: 'SidebarCtrl',
+        controller: 'SidebarCtrl', // by sharing the controller, the controller is 'called' twice
         templateUrl: 'views/questionSidebar.html'
     };
 })
