@@ -161,6 +161,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         $scope.questions.push(question);
         // update the current question
         $scope.currentQuestion = question;
+        Questions.editor(question);
         // reset to default empty name and default type
         $scope.question = {q_name: '', q_type: 'true_false'};
 
