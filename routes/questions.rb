@@ -35,7 +35,8 @@ module QuizEditor
 				body = MultiJson.load request.body.read
 				halt 500 unless question.update(
 					:q_name => 	body['q_name'],
-					:q_type =>	body['q_type']
+					:q_type =>	body['q_type'],
+					:q_body	=>	body['q_body']
 				)
 				format_response(question, request.accept)
 			end
@@ -45,7 +46,8 @@ module QuizEditor
 				body = MultiJson.load request.body.read
 				question = Question.new(
 					:q_name =>	body['q_name'],
-					:q_type => 	body['q_type']
+					:q_type => 	body['q_type'],
+					:q_body	=>	body['q_body']
 				)
 				if question.save
 					status 201
