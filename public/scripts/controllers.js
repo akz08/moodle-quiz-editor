@@ -180,7 +180,9 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     };
 
     $scope.saveQuestion = function(question) {
+      // update the backend question
       $scope.putQuestion(question, question);
+      // TODO: update the backend answers 
     };
 
     $scope.deleteQuestion = function(question) {
@@ -273,7 +275,11 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
     // USED FOR CALLBACK
     var updateQuestion = function() {
+      // update the question in the editor to the selected one
       $scope.currentQuestion = Questions.getCurrent();
+
+      // update its answers too
+      $scope.loadAnswers();
     };
 
     Questions.registerEditObserverCallback(updateQuestion);
@@ -296,29 +302,84 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       toolbar: false
     };
 
+    $scope.loadAnswers = function() {
+        Questions.getAllAnswers().then(function(answers) {
+        // console.log(questions);
+        $scope.answers = answers;
+        console.log(answers);
+      });
+    };
+
     // some test code to try prototype the answer creation blocks
-    $scope.answers = [{ text: 'answer 1', editing: false}, {text: 'answer 2', editing: false}];
+    // $scope.answers = [{ a_answer: 'answer 1', editing: false}, {a_answer: 'answer 2', editing: false}];
+    // $scope.answers = [];
 
     $scope.editAnswer = function(answer) {
       answer.editing = true;
     };
 
-    $scope.doneEditing = function(elem) {
-      if (! angular.element(elem.srcElement).hasClass('editable')) {
-        angular.forEach($scope.answers, function(key, value) {
-          key.editing = false;
-          console.log(value);
+    // $scope.putQuestion = function(oldQuestion, newQuestion) {
+    //   Questions.edit(oldQuestion, newQuestion).then(function(question) {
+    //     // find the current question 
+    //     var index = $scope.questions.indexOf(oldQuestion);
+    //     // replace its value with the updated value
+    //     $scope.questions[index] = question;
+    //     // update the editor question
+    //     Questions.editor(newQuestion);
+    //   });
+    // };
+
+    // $scope.createQuestion = function() {
+    //   Questions.create($scope.question).then(function(question) {
+    //     $scope.questions.push(question);
+    //     // update the current question
+    //     $scope.currentQuestion = question;
+    //     // reset to default empty name and default type
+    //     $scope.question = {q_name: '', q_type: 'true_false'};
+
+    //     // check if currentCategory exists first
+    //     if ($scope.currentCategory) {
+    //       Categories.registerQuestion($scope.currentCategory.id, question).then(function(categoryQuestions) {
+    //         console.log(categoryQuestions);
+    //       });
+    //     }
+    //   });
+    // };
+
+    $scope.putAnswer = function(answer) {
+      Questions.editAnswer(answer).then(function(answer) {
+        console.log(answer);
+      });
+    };
+
+    $scope.doneEditing = function(answer) {
+      if (! angular.element(answer.srcElement).hasClass('editable')) {
+        angular.forEach($scope.answers, function(answer) {
+          // set the answer editing value to false to trigger ng-show/hide
+          answer.editing = false;
+          // console.log(answer);
         });
       }
+      // update the answer in the backend
+      $scope.putAnswer(answer);
     };
 
     $scope.newAnswer = function() {
-      $scope.answers.push({ text: '', editing: false});
+      // create a new answer with blank text
+      var newAnswerTemplate = {a_answer: '', editing: false};
+      Questions.createAnswer(newAnswerTemplate).then(function(answer) {
+        // add the newly created answer to the local list
+        $scope.answers.push(answer);
+      });
     };
 
     $scope.deleteAnswer = function(answer) {
+      Questions.deleteAnswer(answer.id).then(function() {
+        console.log('controller:');
+        console.log(answer);
         var i = $scope.answers.indexOf(answer);
         $scope.answers.splice(i, 1);
+      });
     };
 
 }])

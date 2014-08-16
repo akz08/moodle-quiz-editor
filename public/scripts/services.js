@@ -54,8 +54,19 @@ quizeditorApp.factory('Questions', ['Restangular',
 			getAll: function() {
 				return _Questions.getList();			
 			},
+			getAllAnswers: function() {
+				// return the answers of the currentQuestion
+				return _Questions.get(currentQuestion.id).then(function(question) {
+					return question.getList('answers');
+				});
+			},
 			create: function(newQuestion) {
 				return _Questions.post(newQuestion).then(function(result) {
+					return result;
+				});
+			},
+			createAnswer: function(newAnswer) {
+				return restAngular.one('questions', currentQuestion.id).all('answers').post(newAnswer).then(function(result) {
 					return result;
 				});
 			},
@@ -69,11 +80,28 @@ quizeditorApp.factory('Questions', ['Restangular',
 					return result;
 				});
 			},
+			editAnswer: function(answer) {
+				return answer.customPUT(answer).then(function(result) {
+					return result;
+				});
+			},
 			delete: function(questionId) {
 				// get question by the given id, and delete if found
 				return _Questions.get(questionId).then(function(question) {
 					question.remove();
 				});
+			},
+			deleteAnswer: function(answerId) {
+				// console.log(answerId);
+				return restAngular.one('questions',currentQuestion.id).one('answers', answerId).get().then(function(answer) {
+					answer.remove();
+				});
+
+				// currentQuestion.getList('answers').then(function(answer) {
+				// 		console.log(answer.get(answerId));
+						// console.log(answer);
+					// });
+				// });
 			}
 
 		};

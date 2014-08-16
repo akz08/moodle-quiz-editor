@@ -40,9 +40,9 @@
             </div>
             <div class="answer-btn-body" ng-dblclick="editAnswer(answer)">
                 <!-- answer text goes here -->
-                <label style="width: 100%;" class="editable" ng-hide="answer.editing">{{ answer.text }}</label>
+                <label style="width: 100%;" class="editable" ng-hide="answer.editing">{{ answer.a_answer }}</label>
                 <form  ng-submit="doneEditing(answer)" ng-show="answer.editing">
-                	<input style="width: 100%; height: 3em; text-align: center;" class="editable" ng-model="answer.text">
+                	<input style="width: 100%; height: 3em; text-align: center;" class="editable" ng-model="answer.a_answer">
                 </form>
             </div>
             <div class="answer-btn-delete" ng-click="deleteAnswer(answer)">
@@ -52,6 +52,10 @@
         <div class="answer-expand"></div>
     </div>
     
+<!--     <div class="new-answer" ng-click="loadAnswers()">
+        <p>load answers (temp button)</p>
+    </div> -->
+
     <div class="new-answer" ng-click="newAnswer()">
         <i class="new-icon fa fa-plus fa-2x"></i>
     </div>
