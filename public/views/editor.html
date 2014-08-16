@@ -1,6 +1,11 @@
+<!-- <div class="disable-editor-overlay" ng-show="isDefaultQuestion()" >
+	<p>Please create and/or select a question to edit</p>
+</div> -->
+
+
 <nav class="navbar navbar-default navbar-static-top editor-navbar" role="navigation">
   <ul class="nav navbar-nav navbar-left">
-	<li><a href=""><i class="fa fa-save fa-fw"></i> Save Question</a>
+	<li><a ng-click="saveQuestion(currentQuestion)"><i class="fa fa-save fa-fw"></i> Save Question</a>
 	</li>
 	<li>
 		<p class="navbar-text"> Title: {{ currentQuestion.q_name }} </p>
@@ -20,10 +25,10 @@
 
 
     <form method="post">
-    	<textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel"></textarea>
+    	<textarea ui-tinymce="tinymceOptions" ng-model="currentQuestion.q_body"></textarea>
     </form>
 
-   <p> {{ tinymceModel }} </p>
+   <p> {{ currentQuestion.q_body }} </p>
 
     <div class="answer-container" ng-repeat="answer in answers">
         <div class="answer-main">
@@ -50,5 +55,6 @@
     <div class="new-answer" ng-click="newAnswer()">
         <i class="new-icon fa fa-plus fa-2x"></i>
     </div>
+
 
 </div>

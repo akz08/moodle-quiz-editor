@@ -135,7 +135,7 @@ quizeditorApp.factory('Questions', ['Restangular',
 				// });
 
 				return _Categories.get(categoryId).then(function(category) {
-					console.log(category.getList('questions'));
+					// console.log(category.getList('questions'));
 
 					return category.getList('questions');
 				});

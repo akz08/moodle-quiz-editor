@@ -21,15 +21,23 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
     Categories.getAll().then(function(categories) {
       $scope.categories = categories;
+
+      // set the first category (default created category) to be the current category
+      $scope.currentCategory = categories[0];
+
+      // load all the questions in this category
+      $scope.loadCategoryQuestions($scope.currentCategory.id);
     });
 
     $scope.createCategory = function() {
       Categories.create($scope.category).then(function(category) {
         $scope.categories.push(category);
         // update the current category (could also use the callback)
-        $scope.currentCategory = $scope.category;
+        $scope.currentCategory = category;
         // reset to default empty category values
         $scope.category = {c_name: '', c_description: ''};
+        // load the questions in this new category
+        $scope.loadCategoryQuestions($scope.currentCategory.id);
       });
     };
 
@@ -117,7 +125,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
     $scope.loadCategoryQuestions = function(categoryId) {
       Categories.getQuestions(categoryId).then(function(questions) {
-        console.log(questions);
+        // console.log(questions);
         $scope.questions = questions;
       });
     };
@@ -125,6 +133,9 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     /** QUESTIONS **/
     $scope.question = {q_name: '', q_type: 'true_false'};
 
+    $scope.isDefaultQuestion = function() {
+      return $scope.currentQuestion.q_name === 'default title';
+    };
 
     // just grab all the questions (for now)
     $scope.loadAllQuestions = function() {
@@ -136,14 +147,15 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         $scope.currentCategory = false;
     };
 
-    // default load questions so that there is a list to add questions to
-    $scope.loadAllQuestions();
+    // default load questions in the current category
+    // $scope.loadCategoryQuestions($scope.currentCategory);
+    // console.log($scope.currentCategory.id);
 
     $scope.createQuestion = function() {
       Questions.create($scope.question).then(function(question) {
         $scope.questions.push(question);
         // update the current question
-        $scope.currentQuestion = $scope.question;
+        $scope.currentQuestion = question;
         // reset to default empty name and default type
         $scope.question = {q_name: '', q_type: 'true_false'};
 
@@ -165,6 +177,10 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
         // update the editor question
         Questions.editor(newQuestion);
       });
+    };
+
+    $scope.saveQuestion = function(question) {
+      $scope.putQuestion(question, question);
     };
 
     $scope.deleteQuestion = function(question) {
@@ -276,7 +292,8 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       // handle_event_callback: function (e) {
 
       // },
-      menubar: 'edit format'
+      menubar: '',
+      toolbar: false
     };
 
     // some test code to try prototype the answer creation blocks
@@ -290,6 +307,7 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       if (! angular.element(elem.srcElement).hasClass('editable')) {
         angular.forEach($scope.answers, function(key, value) {
           key.editing = false;
+          console.log(value);
         });
       }
     };
