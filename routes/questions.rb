@@ -112,7 +112,7 @@ module QuizEditor
 
 			# DELETE a specific answer
 			delete '/questions/:q_id/answers/:a_id' do
-				halt 500 unless answer_by_id(question_by_id(params[:q_id], params[:a_id])).destroy
+				halt 500 unless answer_by_id(question_by_id(params[:q_id]), params[:a_id]).destroy
 			end
 
 			after do
