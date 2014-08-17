@@ -76,7 +76,7 @@ quizeditorApp.factory('Questions', ['Restangular',
 				notifyEditObservers();
 			},
 			edit: function(oldQuestion, newQuestion) {
-				return oldQuestion.customPUT(newQuestion).then(function(result) {
+				return restAngular.one('questions', newQuestion.id).customPUT(newQuestion).then(function(result) {
 					return result;
 				});
 			},
