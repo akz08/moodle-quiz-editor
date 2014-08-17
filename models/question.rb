@@ -7,8 +7,11 @@ class Question < ActiveRecord::Base
 	## Validation
   validates :user_id, presence: true
 
-	valid_types = [ "calculated", "description", "essay", "matching", "embedded_answers", 
-					"multiple_choice", "short_answer", "numerical", "true_false" ]
+	valid_types = [ "multiple_choice", "true_false" ]
+
+  # Remaining Moodle question types to be implemented
+  # valid_types.concat( ["calculated", "description", "essay", "matching", 
+          # "embedded_answers", "short_answer", "numerical"] )
 
 	validates :q_name, presence: true
 	validates :q_type, presence: true, 
