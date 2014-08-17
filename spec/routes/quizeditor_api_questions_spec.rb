@@ -59,7 +59,7 @@ describe "QuizEditor API" do
 			FactoryGirl.create(:question)
 			put_json('/questions/1', {
 					q_name: "A new Question Title",
-					q_type: "essay"
+					q_type: "true_false"
 			})
 		end
 
@@ -71,7 +71,7 @@ describe "QuizEditor API" do
 
 		it 'returns the changed question' do 
 			expect(resp[:q_name]).to eq("A new Question Title")
-			expect(resp[:q_type]).to eq("essay")
+			expect(resp[:q_type]).to eq("true_false")
 		end
 
 	end
