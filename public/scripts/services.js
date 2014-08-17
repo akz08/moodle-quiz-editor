@@ -199,4 +199,25 @@ quizeditorApp.factory('Questions', ['Restangular',
 			}
 		};
 	}
-]);
+])
+.factory('Editor', [function(){
+
+	var saveObserverCallbacks = [];
+
+	var notifySaveObservers = function() {
+		angular.forEach(saveObserverCallbacks, function(callback) {
+			callback();
+		});
+	};
+
+	return {
+		registerSaveObserverCallback: function(callback){
+			saveObserverCallbacks.push(callback);
+		},
+		save: function() {
+			notifySaveObservers();
+			console.log('this many observer callbacks:');
+			console.log(saveObserverCallbacks.length);
+		}
+	};
+}]);

@@ -22,7 +22,6 @@ quizeditorApp.directive('layoutContainer', function() {
 })
 .directive('categorySidebar', function() {
     return {
-        replace: false,
         restrict: 'A', 
         controller: 'SidebarCtrl',
         templateUrl: 'views/categorySidebar.html'
@@ -30,7 +29,6 @@ quizeditorApp.directive('layoutContainer', function() {
 })
 .directive('questionSidebar', function() {
     return {
-        replace: false,
         restrict: 'A', 
         controller: 'SidebarCtrl', // by sharing the controller, the controller is 'called' twice
         templateUrl: 'views/questionSidebar.html'
@@ -38,9 +36,26 @@ quizeditorApp.directive('layoutContainer', function() {
 })
 .directive('editorMain', function() {
     return {
-        replace: false,
         restrict: 'A',
         controller: 'EditorCtrl',
         templateUrl: 'views/editor.html'
+    };
+})
+.directive('answersTrueFalse', function() {
+    return {
+        restrict: 'E',
+        scope: {
+            answers: '=answers'
+        },
+        // template: 'You have loaded the tf answers directive',
+        controller: 'AnswersTrueFalseCtrl',
+        templateUrl: 'views/answersTrueFalse.html'
+    };
+})
+.directive('answersMultipleChoice', function() {
+    return {
+        restrict: 'E',
+        // template: 'You have loaded the mcq answers directive',
+        templateUrl: 'views/answersMultipleChoice.html'
     };
 });

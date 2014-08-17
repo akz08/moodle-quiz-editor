@@ -217,6 +217,9 @@ body {
 .answer-btn-correct:hover {
     background-color: #54a6c6;
 }
+.answer-btn-correct-toggled {
+    color: #88fc88;
+}
 .answer-btn-body {
     height: 3em;
     flex: 1 1 auto;

@@ -12,8 +12,8 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
 }])
 
-.controller('SidebarCtrl', ['$scope', '$modal', 'Categories', 'Questions',
-  function($scope, $modal, Categories, Questions) {
+.controller('SidebarCtrl', ['$scope', '$modal', 'Categories', 'Editor', 'Questions',
+  function($scope, $modal, Categories, Editor, Questions) {
     /*jshint camelcase: false */
 
     /** CATEGORIES **/
@@ -191,6 +191,15 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       // TODO: update the backend answers 
     };
 
+    $scope.saveCurrentQuestion = function() {
+      $scope.putQuestion($scope.currentQuestion, $scope.currentQuestion);
+      console.log('saved the current question via the save button');
+    };
+
+    // since the controller is called twice, it's registering the thing twice!
+    console.log('registering saveCurrentQuestion');
+    Editor.registerSaveObserverCallback($scope.saveCurrentQuestion);
+
     $scope.deleteQuestion = function(question) {
       Questions.delete(question.id).then(function() {
         var i = $scope.questions.indexOf(question);
@@ -273,22 +282,157 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
 }])
 
-.controller('EditorCtrl', ['$scope', '$window', 'Questions',
-  function($scope, $window, Questions) {
+.controller('AnswersTrueFalseCtrl', ['$rootScope', '$scope', 'Editor', 'Questions', 
+  function($rootScope, $scope, Editor, Questions){
+    /*jshint camelcase: false */
+
+    // the controller is only called once if types of the same
+    // kind are chosen consecutively - need to somehow move the answer 
+    // loading logic into here
+    console.log('called the answers controller');
+
+    // CALLBACK FUNCTION
+    var updateAnswers = function() {
+      console.log('called updateAnswers');
+
+      $scope.loadAnswers();
+
+    };
+
+    Questions.registerEditObserverCallback(updateAnswers);
+
+    // $rootScope.$on('editorLoaded', function(event, args) {
+    //   console.log(event);
+    //   console.log(args);
+    // });
+
+    $scope.loadAnswers = function() {
+        Questions.getAllAnswers().then(function(answers) {
+        // console.log(questions);
+        $scope.answers = answers;
+        // console.log(answers);
+
+        // if it doesn't have any answers, default add two true/false answers
+        console.log($scope.answers.length);
+
+        if ($scope.answers.length === 0) {
+        
+          Questions.createAnswer({a_answer: 'true'}).then(function(answer) {
+            // add the newly created answer to the local list
+            $scope.answers.push(answer);
+          });
+          
+          Questions.createAnswer({a_answer: 'false'}).then(function(answer) {
+            // add the newly created answer to the local list
+            $scope.answers.push(answer);
+          });
+        }
+
+      });
+    };
+
+    // $scope.editAnswer = function(answer) {
+    //   answer.editing = true;
+    // };
+
+    $scope.putAnswer = function(answer) {
+      Questions.editAnswer(answer).then(function(answer) {
+        console.log(answer);
+      });
+    };
+
+    var putAllAnswers = function() {
+      for(var i = 0; i < $scope.answers.length; i++) {
+        $scope.putAnswer($scope.answers[i]);
+      }
+    };
+
+    Editor.registerSaveObserverCallback(putAllAnswers);
+
+    // $scope.doneEditing = function(answer) {
+    //   if (! angular.element(answer.srcElement).hasClass('editable')) {
+    //     angular.forEach($scope.answers, function(answer) {
+    //       // set the answer editing value to false to trigger ng-show/hide
+    //       answer.editing = false;
+    //       // console.log(answer);
+    //     });
+    //   }
+    //   // update the answer in the backend
+    //   $scope.putAnswer(answer);
+    // };
+
+    $scope.toggleCorrect = function() {
+      if ($scope.answers[0].a_fraction) {
+        $scope.answers[0].a_fraction = 0;
+        $scope.answers[1].a_fraction = 100;
+      } else {
+        $scope.answers[0].a_fraction = 100;
+        $scope.answers[1].a_fraction = 0; 
+      }
+    };
+
+    // $scope.newAnswer = function() {
+    //   // create a new answer with blank text
+    //   var newAnswerTemplate = {a_answer: '', editing: false};
+    //   Questions.createAnswer(newAnswerTemplate).then(function(answer) {
+    //     // add the newly created answer to the local list
+    //     $scope.answers.push(answer);
+    //   });
+    // };
+
+    // $scope.deleteAnswer = function(answer) {
+    //   Questions.deleteAnswer(answer.id).then(function() {
+    //     console.log('controller:');
+    //     console.log(answer);
+    //     var i = $scope.answers.indexOf(answer);
+    //     $scope.answers.splice(i, 1);
+    //   });
+    // };
+  
+}])
+
+.controller('EditorCtrl', ['$rootScope', '$scope', '$window', 'Editor', 'Questions',
+  function($rootScope, $scope, $window, Editor, Questions) {
     /*jshint camelcase: false */
     $scope.currentQuestion = {'q_name': 'default title',
                       'q_type': 'default type'};
 
-    // USED FOR CALLBACK
+    $scope.answers = [];
+
+    $scope.saveEditor = function() {
+      Editor.save();
+      console.log('clicked on save button!');
+    };
+
+    // CALLBACK FUNCTION
     var updateQuestion = function() {
+      console.log('called updateQuestion');
       // update the question in the editor to the selected one
       $scope.currentQuestion = Questions.getCurrent();
+      // var args = 1;
+      // $rootScope.$emit('editorLoaded', args);
+      // update its answers too 
+      //  : TO BE REMOVED AND PUT INTO ANSWER CTRL LOGIC (somehow)
+      // $scope.loadAnswers();
 
-      // update its answers too
-      $scope.loadAnswers();
     };
 
     Questions.registerEditObserverCallback(updateQuestion);
+
+    // returns a boolean if the current question type matches the 
+    // given answer type 
+    $scope.isTypeMatched = function(answerType) {
+      // replace hyphens with underscores to match the 
+      //  backend data representation as a convenience
+
+      answerType = answerType.replace('-', '_');
+
+      if ($scope.currentQuestion.q_type === answerType) {
+        return true;
+      } else {
+        return false;
+      }
+    };
 
     $scope.getMoodleXml = function() {
       // slight hack to get things running. the FULL url should be returned by the service
@@ -308,57 +452,51 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       toolbar: false
     };
 
-    $scope.loadAnswers = function() {
-        Questions.getAllAnswers().then(function(answers) {
-        // console.log(questions);
-        $scope.answers = answers;
-        // console.log(answers);
-      });
-    };
 
-    // some test code to try prototype the answer creation blocks
-    // $scope.answers = [{ a_answer: 'answer 1', editing: false}, {a_answer: 'answer 2', editing: false}];
-    // $scope.answers = [];
 
-    $scope.editAnswer = function(answer) {
-      answer.editing = true;
-    };
+    // // some test code to try prototype the answer creation blocks
+    // // $scope.answers = [{ a_answer: 'answer 1', editing: false}, {a_answer: 'answer 2', editing: false}];
+    // // $scope.answers = [];
 
-    $scope.putAnswer = function(answer) {
-      Questions.editAnswer(answer).then(function(answer) {
-        console.log(answer);
-      });
-    };
+    // $scope.editAnswer = function(answer) {
+    //   answer.editing = true;
+    // };
 
-    $scope.doneEditing = function(answer) {
-      if (! angular.element(answer.srcElement).hasClass('editable')) {
-        angular.forEach($scope.answers, function(answer) {
-          // set the answer editing value to false to trigger ng-show/hide
-          answer.editing = false;
-          // console.log(answer);
-        });
-      }
-      // update the answer in the backend
-      $scope.putAnswer(answer);
-    };
+    // $scope.putAnswer = function(answer) {
+    //   Questions.editAnswer(answer).then(function(answer) {
+    //     console.log(answer);
+    //   });
+    // };
 
-    $scope.newAnswer = function() {
-      // create a new answer with blank text
-      var newAnswerTemplate = {a_answer: '', editing: false};
-      Questions.createAnswer(newAnswerTemplate).then(function(answer) {
-        // add the newly created answer to the local list
-        $scope.answers.push(answer);
-      });
-    };
+    // $scope.doneEditing = function(answer) {
+    //   if (! angular.element(answer.srcElement).hasClass('editable')) {
+    //     angular.forEach($scope.answers, function(answer) {
+    //       // set the answer editing value to false to trigger ng-show/hide
+    //       answer.editing = false;
+    //       // console.log(answer);
+    //     });
+    //   }
+    //   // update the answer in the backend
+    //   $scope.putAnswer(answer);
+    // };
 
-    $scope.deleteAnswer = function(answer) {
-      Questions.deleteAnswer(answer.id).then(function() {
-        console.log('controller:');
-        console.log(answer);
-        var i = $scope.answers.indexOf(answer);
-        $scope.answers.splice(i, 1);
-      });
-    };
+    // $scope.newAnswer = function() {
+    //   // create a new answer with blank text
+    //   var newAnswerTemplate = {a_answer: '', editing: false};
+    //   Questions.createAnswer(newAnswerTemplate).then(function(answer) {
+    //     // add the newly created answer to the local list
+    //     $scope.answers.push(answer);
+    //   });
+    // };
+
+    // $scope.deleteAnswer = function(answer) {
+    //   Questions.deleteAnswer(answer.id).then(function() {
+    //     console.log('controller:');
+    //     console.log(answer);
+    //     var i = $scope.answers.indexOf(answer);
+    //     $scope.answers.splice(i, 1);
+    //   });
+    // };
 
 }])
 

@@ -1,0 +1,12 @@
+<div class="answer-container" ng-repeat="answer in answers">
+
+    <div class="answer-main">
+        <div class="answer-btn-correct">
+            <i class="correct-icon fa fa-check fa-2x" ng-class="{'answer-btn-correct-toggled': answer.a_fraction > 0}" ng-click="toggleCorrect()"></i>
+        </div>
+        <div class="answer-btn-body">
+            <label style="width: 100%;">{{ answer.a_answer }}</label>
+        </div>
+    </div>
+    <div class="answer-expand"></div>
+</div>
