@@ -143,6 +143,9 @@ quizeditorApp.factory('Questions', ['Restangular',
 		};
 
 		return {
+			getMoodleXmlUrl: function(category) {
+				return restAngular.one('categories', category.id).getRestangularUrl();
+			},
 			registerCategoryObserverCallback : function(callback) {
 				editObserverCallbacks.push(callback);
 			},

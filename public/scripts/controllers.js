@@ -1,6 +1,6 @@
 'use strict';
 
-quizeditorApp.controller('NavCtrl', ['$scope', '$location',
+quizeditorApp.controller('NavCtrl', ['$scope', '$location', 
   function($scope, $location) {
     $scope.isActive = function(viewLocation) {
       return viewLocation === $location.path();
@@ -12,11 +12,20 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
 }])
 
-.controller('SidebarCtrl', ['$scope', '$modal', 'Categories', 'Editor', 'Questions',
-  function($scope, $modal, Categories, Editor, Questions) {
+.controller('SidebarCtrl', ['$scope', '$modal', '$window', 'Categories', 'Editor', 'Questions',
+  function($scope, $modal, $window, Categories, Editor, Questions) {
     /*jshint camelcase: false */
 
     /** CATEGORIES **/
+
+    $scope.getMoodleXml = function(category) {
+      // slight hack to get things running. the FULL url should be returned by the service
+      var baseUrl = Categories.getMoodleXmlUrl(category);
+      console.log(baseUrl);
+
+      // open a new window to download the xml file
+      $window.open(baseUrl + '/export?type=moodle_xml');
+    }; 
 
     // initialisation
     $scope.category = {c_name: '', c_description: ''};
@@ -434,14 +443,14 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
       }
     };
 
-    $scope.getMoodleXml = function() {
-      // slight hack to get things running. the FULL url should be returned by the service
-      var baseUrl = Questions.getCurrentMoodleXmlUrl();
-      console.log(baseUrl);
+    // $scope.getMoodleXml = function() {
+    //   // slight hack to get things running. the FULL url should be returned by the service
+    //   var baseUrl = Questions.getCurrentMoodleXmlUrl();
+    //   console.log(baseUrl);
 
-      // open a new window to download the xml file
-      $window.open(baseUrl + '/export?type=moodle_xml');
-    };
+    //   // open a new window to download the xml file
+    //   $window.open(baseUrl + '/export?type=moodle_xml');
+    // };
 
     // TinyMCE options
     $scope.tinymceOptions = {
