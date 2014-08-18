@@ -20,9 +20,9 @@ module QuizEditor
 					question = question_by_id(params[:q_id])
 					
 					content_type :xml
-					attachment "moodlexml_question#{params[:format]}.xml"
+					attachment "moodlexml_question.xml"
 
-					"#{generate_moodle_xml("category", question.q_type, question.q_name)}"
+					# "#{generate_moodle_xml("category", question.q_type, question.q_name)}"
 				else
 					halt 404
 				end

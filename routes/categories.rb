@@ -1,6 +1,7 @@
 module QuizEditor
   module Routes
     class Categories < Routes::Base
+      helpers Helpers::GenerateMoodleXmlHelper
 
       ## Categories
       # GETs all available categories
@@ -11,6 +12,20 @@ module QuizEditor
       # GETs a specific category (is this useful?)
       get '/categories/:c_id' do
         format_response(category_by_id(params[:c_id]), request.accept)
+      end
+
+      # GETs a category and exports it to a given type
+      get '/categories/:c_id/export' do
+        if params[:type] == "moodle_xml" then
+          category = category_by_id(params[:c_id])
+
+          content_type :xml
+          attachment "moodlexml_category#{params[:type]}.xml"
+
+          "#{generate_moodle_xml(category)}"
+        else
+          halt 404
+        end
       end
 
       # PUTs new values into a category
