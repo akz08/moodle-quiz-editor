@@ -28,6 +28,8 @@ debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again pa
 
 # Install MySQL 5.5
 apt-get install -y mysql-server-5.5
+sudo apt-get install libmysqlclient-dev
+
 # setup default database (now redundant with ActiveRecord)
 mysql -uroot -puclthesis -e "CREATE DATABASE moodle_quiz_editor;"
 
