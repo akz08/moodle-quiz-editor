@@ -36,22 +36,22 @@ describe "QuizEditor API" do
 
 	end
 
-	describe "GET /questions/:q_id/export?type=moodle_xml" do
+	# describe "GET /questions/:q_id/export?type=moodle_xml" do
 
-		before(:each) do
-			FactoryGirl.create(:question)
-			get '/questions/1/export?type=moodle_xml'
-		end
+	# 	before(:each) do
+	# 		FactoryGirl.create(:question)
+	# 		get '/questions/1/export?type=moodle_xml'
+	# 	end
 
-		it 'responds successfully' do
-			expect(last_response).to be_ok
-		end
+	# 	it 'responds successfully' do
+	# 		expect(last_response).to be_ok
+	# 	end
 
-		it 'returns an xml attachment' do
-			expect(last_response.headers['Content-Type']).to eql('application/xml;charset=utf-8')
-		end
+	# 	it 'returns an xml attachment' do
+	# 		expect(last_response.headers['Content-Type']).to eql('application/xml;charset=utf-8')
+	# 	end
 
-	end
+	# end
 
 	describe "PUT /questions/:q_id" do
 

@@ -15,18 +15,18 @@ module QuizEditor
 			end
 
 			# GETs a question and exports it to a given type
-			get '/questions/:q_id/export' do 
-				if params[:type] == "moodle_xml" then
-					question = question_by_id(params[:q_id])
+			# get '/questions/:q_id/export' do 
+			# 	if params[:type] == "moodle_xml" then
+			# 		question = question_by_id(params[:q_id])
 					
-					content_type :xml
-					attachment "moodlexml_question.xml"
+			# 		content_type :xml
+			# 		attachment "moodlexml_question.xml"
 
-					# "#{generate_moodle_xml("category", question.q_type, question.q_name)}"
-				else
-					halt 404
-				end
-			end
+			# 		# "#{generate_moodle_xml("category", question.q_type, question.q_name)}"
+			# 	else
+			# 		halt 404
+			# 	end
+			# end
 
 			# PUTs new values into a specific question
 			put '/questions/:q_id' do
