@@ -6,10 +6,14 @@ exports.config = {
   ],
 
   capabilities: {
-    'browserName': 'phantomjs',
+    'browserName': 'chrome'
+    // 'browserName': 'phantomjs',
+    // 'phantomjs.binary.path': './node_modules/phantomjs/bin/phantomjs',
 
-    'phantomjs.binary.path': './node_modules/phantomjs/bin/phantomjs',
+  },
 
+  onPrepare: function() {
+    // browser.driver.manage().window().setSize(1280, 1024);
   },
 
   baseUrl: 'http://0.0.0.0:9000/',
