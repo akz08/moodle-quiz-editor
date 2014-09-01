@@ -326,15 +326,20 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
 
         if ($scope.answers.length === 0) {
         
+          // cascading to ensure that 'true' is always at the top
           Questions.createAnswer({a_answer: 'true'}).then(function(answer) {
             // add the newly created answer to the local list
+            // set true to be default 
+            answer.a_fraction = 100;
             $scope.answers.push(answer);
+
+            Questions.createAnswer({a_answer: 'false'}).then(function(answer) {
+              // add the newly created answer to the local list
+              $scope.answers.push(answer);
+            }); 
           });
           
-          Questions.createAnswer({a_answer: 'false'}).then(function(answer) {
-            // add the newly created answer to the local list
-            $scope.answers.push(answer);
-          });
+
         }
 
       });
@@ -370,14 +375,25 @@ quizeditorApp.controller('NavCtrl', ['$scope', '$location',
     //   $scope.putAnswer(answer);
     // };
 
-    $scope.toggleCorrect = function() {
-      if ($scope.answers[0].a_fraction) {
-        $scope.answers[0].a_fraction = 0;
-        $scope.answers[1].a_fraction = 100;
+    $scope.toggleAnswer = function(index) {
+
+      // console.log(index);
+      // console.log(Questions.getCurrent().q_type);
+
+      // console.log('there are ' +  $scope.answers.length + ' answers');
+      // console.log('the type is ' + Questions.getCurrent().q_type);
+
+      if($scope.answers[index].a_fraction) {
+        $scope.answers[index].a_fraction = 0;
+        $scope.answers[(index+1) % 2].a_fraction = 100;
       } else {
-        $scope.answers[0].a_fraction = 100;
-        $scope.answers[1].a_fraction = 0; 
+        $scope.answers[index].a_fraction = 100;
+        $scope.answers[(index+1) % 2].a_fraction = 0;
       }
+
+      console.log('0 has ' + $scope.answers[0].a_fraction + ' points');
+      console.log('1 has ' + $scope.answers[1].a_fraction + ' points');
+      
     };
 
     // $scope.newAnswer = function() {
