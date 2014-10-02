@@ -9,4 +9,18 @@ This project was developed as part of an MSc in Computer Science at University C
 
 Development
 -----------
-Vagrant was used to ease development on the project, and so should be used with the Vagrantfile and shell script (check the Vagrant official documentation on use).
+Vagrant was used to ease development on the project, and so should be used with the Vagrantfile and shell script.
+
+```sh
+git clone git@github.com:akz08/moodle-quiz-editor.git
+cd moodle-quiz-editor
+vagrant up
+```
+
+Dependencies
+-----------
+1. [VirtualBox][vbox]
+2. [Vagrant][vagrant]
+
+[vbox]: https://www.virtualbox.org/wiki/Downloads "VirtualBox downloads"
+[vagrant]: http://downloads.vagrantup.com/ "Vagrant downloads"
