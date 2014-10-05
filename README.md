@@ -12,10 +12,20 @@ Development
 Vagrant was used to ease development on the project, and so should be used with the Vagrantfile and shell script.
 
 ```sh
-git clone git@github.com:akz08/moodle-quiz-editor.git
+git clone https://github.com/akz08/moodle-quiz-editor.git
 cd moodle-quiz-editor
 vagrant up
 ```
+
+To get the application running in the Vagrant box, run:
+
+```sh
+vagrant ssh
+cd /vagrant
+rackup -p 8080
+```
+
+The application should now be accessible by visiting `http://localhost:8000`
 
 Dependencies
 -----------
